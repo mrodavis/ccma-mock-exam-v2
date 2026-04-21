@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CCMA Mock Exam 2026 | Complete Study Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,500;0,9..40,700;1,9..40,400&family=Fraunces:opsz,wght@9..144,700;9..144,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#2563eb;--primary-dark:#1e40af;--primary-light:#dbeafe;
+  --success:#059669;--success-light:#d1fae5;
+  --error:#dc2626;--error-light:#fee2e2;
+  --warning:#d97706;--warning-light:#fef3c7;
+  --purple:#7c3aed;--purple-light:#ede9fe;
+  --bg:#f1f5f9;--card-bg:#ffffff;--text:#0f172a;--text-muted:#64748b;--border:#e2e8f0;
+  --radius:14px;--shadow:0 1px 3px rgba(0,0,0,.06),0 4px 12px rgba(0,0,0,.04);
+  --font-display:'Fraunces',serif;--font-body:'DM Sans',system-ui,sans-serif;
+}
+[data-theme=dark]{
+  --primary:#60a5fa;--primary-dark:#3b82f6;--primary-light:#1e3a5f;
+  --success:#34d399;--success-light:#064e3b;
+  --error:#f87171;--error-light:#450a0a;
+  --warning:#fbbf24;--warning-light:#451a03;
+  --purple:#a78bfa;--purple-light:#2e1065;
+  --bg:#0c1222;--card-bg:#1a2332;--text:#e2e8f0;--text-muted:#94a3b8;--border:#2d3a4a;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-height:1.6;
+  transition:background .3s,color .3s}
+.container{max-width:960px;margin:0 auto;padding:20px 16px}
+
+/* HEADER */
+.header{background:linear-gradient(135deg,#1e3a8a 0%,#3b82f6 50%,#6366f1 100%);
+  color:#fff;padding:28px 32px;border-radius:var(--radius);
+  box-shadow:0 8px 32px rgba(30,58,138,.3);margin-bottom:24px;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:-50%;right:-20%;width:60%;height:200%;
+  background:radial-gradient(circle,rgba(255,255,255,.08) 0%,transparent 60%);pointer-events:none}
+.header-content{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;position:relative}
+.header h1{font-family:var(--font-display);font-size:26px;font-weight:800;letter-spacing:-.5px}
+.header-subtitle{font-size:14px;opacity:.85;margin-top:2px;font-weight:300}
+.header-controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.mode-toggle{background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.25);
+  color:#fff;padding:7px 16px;border-radius:8px;font-size:13px;font-weight:600;
+  cursor:pointer;transition:all .2s;backdrop-filter:blur(4px)}
+.mode-toggle:hover{background:rgba(255,255,255,.25)}
+.mode-toggle.active{background:#fff;color:#1e3a8a;border-color:#fff}
+.theme-toggle{background:rgba(255,255,255,.15);border:none;color:#fff;
+  padding:7px 11px;border-radius:8px;cursor:pointer;font-size:17px;transition:all .2s}
+.theme-toggle:hover{background:rgba(255,255,255,.25);transform:scale(1.1)}
+
+/* TABS */
+.tabs{background:var(--card-bg);border-radius:var(--radius);padding:6px;margin-bottom:24px;
+  display:flex;gap:4px;overflow-x:auto;box-shadow:var(--shadow)}
+.tab{padding:10px 18px;border:none;background:0 0;color:var(--text-muted);
+  font-size:13px;font-weight:600;cursor:pointer;border-radius:10px;transition:all .2s;white-space:nowrap}
+.tab:hover{background:var(--primary-light);color:var(--text)}
+.tab.active{background:var(--primary);color:#fff}
+.tab-content{display:none}.tab-content.active{display:block}
+
+/* SECTION GRID */
+.section-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:20px}
+.section-btn{padding:14px 8px;border:2px solid var(--border);border-radius:10px;background:var(--card-bg);
+  cursor:pointer;transition:all .2s;text-align:center;box-shadow:var(--shadow)}
+.section-btn:hover{border-color:var(--primary);transform:translateY(-2px);
+  box-shadow:0 4px 16px rgba(37,99,235,.15)}
+.section-btn.active{border-color:var(--primary);background:var(--primary);color:#fff}
+.section-btn.completed{border-color:var(--success);background:var(--success-light);color:var(--success)}
+.section-title{font-size:13px;font-weight:700;margin-bottom:2px}
+.section-range{font-size:11px;opacity:.7}.section-progress{font-size:11px;margin-top:3px;font-weight:600}
+
+/* FILTER BAR */
+.filter-bar{background:var(--card-bg);border-radius:var(--radius);padding:14px 16px;margin-bottom:20px;
+  display:flex;gap:10px;flex-wrap:wrap;align-items:center;box-shadow:var(--shadow)}
+.filter-bar label{font-size:13px;font-weight:700;color:var(--text-muted)}
+.filter-bar select{padding:7px 12px;border:1.5px solid var(--border);border-radius:8px;
+  background:var(--card-bg);color:var(--text);font-size:13px;cursor:pointer;font-family:var(--font-body)}
+.filter-bar select:focus{outline:0;border-color:var(--primary)}
+.spacer{flex:1}
+.btn{padding:8px 18px;border:none;border-radius:8px;font-size:13px;font-weight:600;
+  cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:6px;font-family:var(--font-body)}
+.btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.12)}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-success{background:var(--success);color:#fff}
+.btn-secondary{background:var(--border);color:var(--text)}
+.btn-danger{background:var(--error);color:#fff}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+
+/* QUESTION CARD */
+.question-card{background:var(--card-bg);border-radius:var(--radius);padding:22px;margin-bottom:14px;
+  box-shadow:var(--shadow);transition:all .3s;border-left:4px solid transparent}
+.question-card.correct{border-left-color:var(--success);background:linear-gradient(90deg,var(--success-light) 0%,var(--card-bg) 80px)}
+.question-card.incorrect{border-left-color:var(--error);background:linear-gradient(90deg,var(--error-light) 0%,var(--card-bg) 80px)}
+.question-card.flagged{border-right:4px solid var(--warning)}
+.question-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:10px}
+.question-number{background:var(--primary-light);color:var(--primary);padding:3px 11px;
+  border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.3px}
+.icon-btn{background:0 0;border:none;font-size:18px;cursor:pointer;padding:3px 7px;
+  border-radius:6px;transition:all .2s;line-height:1}
+.icon-btn:hover{background:var(--warning-light)}.icon-btn.active{color:var(--warning)}
+.question-text{font-size:15px;line-height:1.65;margin-bottom:14px;font-weight:500}
+.category-tag{display:inline-block;background:var(--purple-light);color:var(--purple);
+  padding:2px 10px;border-radius:20px;font-size:10px;font-weight:700;margin-bottom:10px;letter-spacing:.3px}
+.answer-select{width:100%;padding:11px 14px;font-size:14px;border:2px solid var(--border);
+  border-radius:8px;background:var(--card-bg);color:var(--text);cursor:pointer;
+  transition:all .2s;font-family:var(--font-body)}
+.answer-select:hover{border-color:var(--primary)}
+.answer-select:focus{outline:0;border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-light)}
+.answer-select.correct{border-color:var(--success);background:var(--success-light)}
+.answer-select.incorrect{border-color:var(--error);background:var(--error-light)}
+.confidence-btns{display:flex;gap:6px;margin-top:10px}
+.confidence-btn{flex:1;padding:7px;border:1.5px solid var(--border);background:var(--card-bg);
+  border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;font-family:var(--font-body)}
+.confidence-btn:hover{border-color:var(--primary)}.confidence-btn.selected{background:var(--primary);color:#fff;border-color:var(--primary)}
+.feedback{margin-top:10px;padding:10px 14px;border-radius:8px;font-size:13px;font-weight:500}
+.feedback.correct{background:var(--success-light);color:var(--success);border-left:3px solid var(--success)}
+.feedback.incorrect{background:var(--error-light);color:var(--error);border-left:3px solid var(--error)}
+.notes-toggle{margin-top:8px;font-size:12px;color:var(--text-muted);cursor:pointer;font-weight:600;
+  background:none;border:none;font-family:var(--font-body)}
+.notes-toggle:hover{color:var(--primary)}
+.notes-area{margin-top:8px}
+.notes-area textarea{width:100%;padding:8px;border:1.5px solid var(--border);border-radius:6px;
+  background:var(--card-bg);color:var(--text);font-family:var(--font-body);font-size:12px;
+  resize:vertical;min-height:50px}
+.notes-area textarea:focus{outline:0;border-color:var(--primary)}
+
+/* SECTION NAV */
+.section-nav{background:var(--card-bg);border-radius:var(--radius);padding:16px;margin-top:20px;
+  box-shadow:var(--shadow);display:flex;justify-content:space-between;align-items:center;gap:12px}
+.section-info{font-size:13px;font-weight:600;color:var(--text-muted)}
+
+/* DASHBOARD */
+.dashboard{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:20px}
+.stat-card{background:var(--card-bg);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);
+  border-left:4px solid var(--primary)}
+.stat-card.success{border-left-color:var(--success)}.stat-card.error{border-left-color:var(--error)}
+.stat-card.warning{border-left-color:var(--warning)}.stat-card.purple{border-left-color:var(--purple)}
+.stat-value{font-family:var(--font-display);font-size:30px;font-weight:800;color:var(--primary);display:block}
+.stat-card.success .stat-value{color:var(--success)}.stat-card.error .stat-value{color:var(--error)}
+.stat-card.warning .stat-value{color:var(--warning)}.stat-card.purple .stat-value{color:var(--purple)}
+.stat-label{font-size:12px;color:var(--text-muted);font-weight:500;margin-top:2px}
+
+/* ACHIEVEMENTS */
+.panel{background:var(--card-bg);border-radius:var(--radius);padding:22px;margin-bottom:20px;box-shadow:var(--shadow)}
+.panel h3{font-family:var(--font-display);font-size:18px;font-weight:700;margin-bottom:14px}
+.badge-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px}
+.badge{text-align:center;padding:14px 8px;border-radius:10px;background:var(--bg);opacity:.45;transition:all .3s}
+.badge.earned{opacity:1;background:linear-gradient(135deg,#fef3c7,#fcd34d);color:#78350f;
+  transform:scale(1.05);box-shadow:0 4px 16px rgba(245,158,11,.25)}
+.badge-icon{font-size:28px;margin-bottom:6px}.badge-name{font-size:11px;font-weight:700}
+
+/* CATEGORY BARS */
+.cat-item{margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.cat-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.cat-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.cat-name{font-size:13px;font-weight:600}.cat-score{font-size:12px;color:var(--text-muted)}
+.cat-bar-bg{background:var(--bg);height:7px;border-radius:4px;overflow:hidden}
+.cat-bar{height:100%;background:linear-gradient(90deg,var(--primary),var(--success));border-radius:4px;transition:width .4s}
+
+/* TIMER */
+.timer-display{position:fixed;top:16px;right:16px;background:var(--card-bg);padding:10px 18px;
+  border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,.12);font-size:16px;font-weight:700;z-index:1000;
+  font-family:var(--font-display)}
+.hidden{display:none!important}
+@media print{.no-print{display:none!important}body{background:#fff;color:#000}
+  .question-card{break-inside:avoid;border:1px solid #ccc;margin-bottom:16px;box-shadow:none}}
+@media(max-width:768px){
+  .section-grid{grid-template-columns:repeat(3,1fr)}
+  .dashboard{grid-template-columns:repeat(2,1fr)}
+  .header-content{flex-direction:column;align-items:flex-start}
+  .tabs{overflow-x:scroll}.filter-bar{flex-direction:column;align-items:stretch}
+  .section-nav{flex-direction:column}.btn{width:100%;justify-content:center}
+  .timer-display{position:static;margin-bottom:12px;text-align:center}
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header no-print">
+    <div class="header-content">
+      <div>
+        <h1>🏥 CCMA Mock Exam 2026</h1>
+        <div class="header-subtitle">Complete Study Platform · 180 Questions</div>
+      </div>
+      <div class="header-controls">
+        <button class="mode-toggle active" data-mode="study" id="mode-study">📖 Study</button>
+        <button class="mode-toggle" data-mode="exam" id="mode-exam">✍️ Exam</button>
+        <button class="theme-toggle" id="theme-btn">🌙</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="tabs no-print" id="tabs">
+    <button class="tab active" data-tab="quiz">📝 Quiz</button>
+    <button class="tab" data-tab="dashboard">📊 Dashboard</button>
+    <button class="tab" data-tab="review">🔍 Review</button>
+    <button class="tab" data-tab="settings">⚙️ Settings</button>
+  </div>
+
+  <div class="timer-display no-print hidden" id="timer">⏱️ <span id="timer-val">00:00</span></div>
+
+  <!-- QUIZ -->
+  <div class="tab-content active" id="tc-quiz">
+    <div class="section-grid no-print" id="sec-grid"></div>
+    <div class="filter-bar no-print" id="filter-bar">
+      <label>Filter:</label>
+      <select id="f-status">
+        <option value="all">All Questions</option>
+        <option value="unanswered">Unanswered</option>
+        <option value="answered">Answered</option>
+        <option value="flagged">🚩 Flagged</option>
+        <option value="correct">✓ Correct</option>
+        <option value="incorrect">✗ Incorrect</option>
+      </select>
+      <select id="f-cat"><option value="all">All Categories</option></select>
+      <span class="spacer"></span>
+      <button class="btn btn-success" id="btn-check">✓ Check Section</button>
+      <button class="btn btn-secondary" id="btn-reset">↻ Reset</button>
+    </div>
+    <div id="quiz-cards"></div>
+    <div class="section-nav no-print" id="sec-nav">
+      <button class="btn btn-secondary" id="btn-prev">← Previous</button>
+      <span class="section-info" id="sec-info"></span>
+      <button class="btn btn-primary" id="btn-next">Next →</button>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="tab-content" id="tc-dashboard">
+    <div class="dashboard" id="dash-stats"></div>
+    <div class="panel"><h3>🏆 Achievements</h3><div class="badge-grid" id="badges"></div></div>
+    <div class="panel"><h3>📊 Performance by Category</h3><div id="cat-breakdown"></div></div>
+    <div class="panel"><h3>📈 Study Analytics</h3><div id="analytics"></div></div>
+  </div>
+
+  <!-- REVIEW -->
+  <div class="tab-content" id="tc-review">
+    <div class="filter-bar">
+      <label>Review:</label>
+      <select id="review-mode">
+        <option value="incorrect">Incorrect Only</option>
+        <option value="flagged">Flagged Only</option>
+        <option value="low-confidence">Low Confidence</option>
+      </select>
+      <span class="spacer"></span>
+      <button class="btn btn-primary" id="btn-review">Start Review</button>
+    </div>
+    <div id="review-cards"></div>
+  </div>
+
+  <!-- SETTINGS -->
+  <div class="tab-content" id="tc-settings">
+    <div class="panel">
+      <h3>⚙️ Settings</h3>
+      <div style="padding:8px 0">
+        <label style="display:flex;align-items:center;gap:8px;margin-bottom:16px;font-size:14px;cursor:pointer">
+          <input type="checkbox" id="opt-autosave" checked> Auto-save progress
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;margin-bottom:16px;font-size:14px;cursor:pointer">
+          <input type="checkbox" id="opt-timer"> Show timer
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;margin-bottom:16px;font-size:14px;cursor:pointer">
+          <input type="checkbox" id="opt-confidence" checked> Show confidence rating
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;margin-bottom:16px;font-size:14px;cursor:pointer">
+          <input type="checkbox" id="opt-categories" checked> Show question categories
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;margin-bottom:16px;font-size:14px;cursor:pointer">
+          <input type="checkbox" id="opt-notes"> Show notes by default
+        </label>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
+        <button class="btn btn-secondary" id="btn-export">📥 Export Progress</button>
+        <button class="btn btn-secondary" id="btn-import">📤 Import Progress</button>
+        <button class="btn btn-primary" id="btn-print">🖨️ Print Results</button>
+        <button class="btn btn-danger" id="btn-clear">🗑️ Clear All Data</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   CCMA Mock Exam 2026 — Complete Study Platform
+   ============================================================ */
+const Q = [{"num": 1, "question": "In which of the following sections of a SOAP note should a medical assistant document a patient's social history?", "options": ["Plans", "Objective", "Assessment", "Subjective"], "answer": "Subjective", "category": "Medical Records & Documentation"}, {"num": 2, "question": "A medical assistant is caring for a patient who is terminally ill and has been crying uncontrollably as well as refusing to eat or see their family. The assistant should identify this as which of the following K\u00fcbler-Ross stages of grief?", "options": ["Anger", "Depression", "Denial", "Acceptance"], "answer": "Depression", "category": "General Medical Assisting"}, {"num": 3, "question": "medical assistant is performing an ear irrigation for an adult patient. Which of the following actions should the assistant take?", "options": ["Open the ear canal by pulling the pinna upward and backward.", "Open the ear canal by pulling the pinna downward and backward.", "Ask the patient to turn their head to the unaffected ear.", "Aim the fluid toward the bottom of the ear canal."], "answer": "Open the ear canal by pulling the pinna upward and backward.", "category": "General Medical Assisting"}, {"num": 4, "question": "Which of the following waste items should a medical assistant discard in a red biohazardous waste bag?", "options": ["Syringe and needle used for venipuncture", "Broken ampules", "Linens soiled with bodily fluids", "Used suture removal kit"], "answer": "Linens soiled with bodily fluids", "category": "Infection Control & Safety"}, {"num": 5, "question": "Which of the following techniques should a medical assistant use for the routine cleaning of EKG cables?", "options": ["Sanitization", "Soaking", "Disinfection", "Sterilization"], "answer": "Disinfection", "category": "EKG & Cardiac Procedures"}, {"num": 6, "question": "Which of the following is the purpose of monthly financial reconciliation?", "options": ["To ensure the financial records of the medical practice match the information provided on a bank statement", "To ensure patients are paying the medical practice in a timely manner", "To ensure all insurance claims are filed in a timely manner", "To ensure the practice does not get audited by the IRS"], "answer": "To ensure the financial records of the medical practice match the information provided on a bank statement", "category": "General Medical Assisting"}, {"num": 7, "question": "A medical assistant is preparing a patient who has anemia for an examination by the provider. Which of the following manifestations should the assistant expect?", "options": ["Abdominal pain", "Itchy skin", "Cloudy vision", "Irregular heartbeat"], "answer": "Irregular heartbeat", "category": "General Medical Assisting"}, {"num": 8, "question": "A medical assistant is measuring a patient's oxygen saturation with a pulse oximeter. Which of the following actions should the assistant take?", "options": ["Wash the site with soap and warm water.", "Report a reading of 97% to the provider.", "Instruct the patient to take several deep breaths while the sensor is in place.", "Check capillary refill in the patient's finger."], "answer": "Report a reading of 97% to the provider.", "category": "Vital Signs & Measurements"}, {"num": 9, "question": "A medical assistant is writing orders for an outpatient laparoscopic appendectomy. For this outpatient procedure, which of the following sets of procedural codes should the assistant use?", "options": ["CPT", "ICD-10-CM", "HCPCS", "ICD-10-PCS"], "answer": "CPT", "category": "Infection Control & Safety"}, {"num": 10, "question": "Which of the following preventative screening tests is recommended for a patient who is 45 years old?", "options": ["Lung cancer screening", "Dilated eye exam", "Electrocardiogram", "Bone density"], "answer": "Lung cancer screening", "category": "Diagnostic Testing & Screening"}, {"num": 11, "question": "A medical assistant is drawing five blood collection tubes. When should the assistant release the tourniquet?", "options": ["After a flash of blood is visible in the hub of the first tube", "Within 1 min of application", "After removing the needle", "Between 2 and 3 min after application"], "answer": "Within 1 min of application", "category": "Phlebotomy & Specimen Collection"}, {"num": 12, "question": "A medical assistant is performing a venipuncture procedure. According to order of draw, which of the following tubes should the assistant draw after the lavender tube?", "options": ["Red", "Gray", "Light blue", "Green"], "answer": "Gray", "category": "Phlebotomy & Specimen Collection"}, {"num": 13, "question": "Which of the following should occur after exposure to chemicals in the eyes?", "options": ["Flush the eyes for 15 min.", "Flush the eyes for 1 min.", "Flush the eyes for 3 min.", "Flush the eyes for 5 min."], "answer": "Flush the eyes for 15 min.", "category": "General Medical Assisting"}, {"num": 14, "question": "A medical assistant should complete documentation in a patient's medical record at which of the following times?", "options": ["Prior to a procedure", "Immediately following a procedure", "During a procedure", "After completing all procedures for the day"], "answer": "Immediately following a procedure", "category": "Medical Records & Documentation"}, {"num": 15, "question": "Which of the following procedures should a medical assistant perform on a soiled hemostat prior to autoclaving?", "options": ["Antiseptic procedure", "Disinfection", "Sterilization", "Sanitization"], "answer": "Sanitization", "category": "General Medical Assisting"}, {"num": 16, "question": "According to the CDC, which of the following is the minimum length of time recommended for using medical aseptic handwashing after using the restroom, before and after eating, or after seeing patients?", "options": ["Washing for at least 20 seconds", "Washing for at least 60 seconds", "Washing for at least 30 seconds", "Washing for at least 45 seconds"], "answer": "Washing for at least 20 seconds", "category": "Infection Control & Safety"}, {"num": 17, "question": "A medical assistant is collecting a 24-hour urine specimen. Which of the following should the assistant document during a 24-hour urine specimen collection?", "options": ["pH level", "Temperature", "Ketones", "Volume"], "answer": "Volume", "category": "Laboratory Procedures"}, {"num": 18, "question": "A medical assistant is assisting a patient from a wheelchair to an examination table. Which of the following assistive devices should the assistant use to ensure patient safety when transferring?", "options": ["Gait belt", "Cane", "Walker", "Walker"], "answer": "Gait belt", "category": "Patient Care & Positioning"}, {"num": 19, "question": "Which of the following conditions involves an overload of iron in the body?", "options": ["Hemolysis", "Homeostasis", "Histoplasmosis", "Hemochromatosis"], "answer": "Hemochromatosis", "category": "General Medical Assisting"}, {"num": 20, "question": "A medical assistant is reviewing treatment options with a patient who has Graves' disease. Which of the following treatments should the assistant expect the patient to receive?", "options": ["Corticosteroid therapy", "Radiation to the thyroid gland", "Dietary supplementation", "Growth hormone supplementation"], "answer": "Radiation to the thyroid gland", "category": "General Medical Assisting"}, {"num": 21, "question": "A medical assistant is performing a urine analysis on a patient and identifies the color of the urine as a greenish-yellow color. Which of the following can contribute to make the urine that color?", "options": ["Dehydration", "Bile duct obstruction", "Blood loss", "Infection"], "answer": "Infection", "category": "General Medical Assisting"}, {"num": 22, "question": "Which of the following is important when selecting codes to ensure accurate reimbursement for a patient's visit?", "options": ["Codes for the patient's previous illnesses are selected.", "Medical necessity is supported.", "Avoid selecting ICD-10-CM codes.", "Avoid selecting CPT codes."], "answer": "Medical necessity is supported.", "category": "Insurance & Billing"}, {"num": 23, "question": "When processing incoming mail, which of the following steps should a medical assistant take if they are unsure how to process one of the items received?", "options": ["Give the mail to the office manager and ask the manager to determine how to handle the item.", "Return the mail to the sender with a note that it cannot be delivered.", "Post the piece of mail on the office bulletin board with a note asking who should receive it.", "Open the mail to see what the contents are and then provide it to the appropriate staff member."], "answer": "Give the mail to the office manager and ask the manager to determine how to handle the item.", "category": "General Medical Assisting"}, {"num": 24, "question": "When entering a new patient appointment, which of the following is an appropriate amount of time to block off?", "options": ["60 minutes", "80 minutes", "30 minutes", "15 minutes"], "answer": "60 minutes", "category": "Scheduling & Office Operations"}, {"num": 25, "question": "When coaching a patient, which of the following is an example of disease prevention?", "options": ["Providing instructions about effective hand washing", "Providing a patient with information about annual diabetic eye exams", "Providing an instructional video based on the patient home health care and follow-up appointments", "Providing hands-on instruction about how to check a blood glucose level at home"], "answer": "Providing instructions about effective hand washing", "category": "Patient Education & Health Coaching"}, {"num": 26, "question": "When performing a prior authorization for durable medical equipment (DME) for a patient with Medicare, a medical assistant should understand that which of the following Medicare plans covers DME services?", "options": ["Part C", "Part A", "Part B", "Part D"], "answer": "Part B", "category": "Insurance & Billing"}, {"num": 27, "question": "When collecting demographic information from a new patient, which of the following ways can a patient provide this information?", "options": ["Notice of Privacy Practices (NPP)", "Patient portal", "Claim form", "Health information exchange"], "answer": "Patient portal", "category": "General Medical Assisting"}, {"num": 28, "question": "Which of the following is the lay term that can be used in the place of the medical term verrucae?", "options": ["Lice", "Scabies", "Hives", "Wart"], "answer": "Wart", "category": "Anatomy & Medical Terminology"}, {"num": 29, "question": "Which of the following is the appropriate response for a medical assistant to take for a patient who is experiencing anaphylaxis due to an iodine allergy reaction?", "options": ["Give the patient 120 mL (4 oz) of orange juice.", "Move the patient to a warmer area.", "Inform the patient they need to rest in a cool place and increase fluid intake.", "Administer an epinephrine auto-injector immediately, if available, or call 911."], "answer": "Administer an epinephrine auto-injector immediately, if available, or call 911.", "category": "Emergency & First Aid"}, {"num": 30, "question": "A medical assistant is assisting with the examination of an older adult patient who has a forward, rounded curvature of the thoracic spine. Which of the following terms should the assistant use when documenting this finding in the patient's medical record?", "options": ["Subluxation", "Lordosis", "Kyphosis", "Scoliosis"], "answer": "Kyphosis", "category": "Medical Records & Documentation"}, {"num": 31, "question": "A patient calls a provider's office requesting their laboratory results. A medical assistant notes an authorization on the patient's medical record to give the patient the results when they call. Which of the following actions should the assistant take to maintain the patient's confidentiality?", "options": ["Send the results in writing.", "Move to a private office.", "Place the call on speaker.", "Make calls after hours."], "answer": "Move to a private office.", "category": "Insurance & Billing"}, {"num": 32, "question": "A medical assistant is performing venipuncture. At which of the following angles should the assistant insert the needle into the vein?", "options": ["60\u00b0", "15\u00b0", "90\u00b0", "45\u00b0"], "answer": "15\u00b0", "category": "Phlebotomy & Specimen Collection"}, {"num": 33, "question": "Which of the following should a medical assistant ensure when obtaining prior authorization for a referral?", "options": ["Tell the patient prior authorization is obtained after their visit.", "Have the patient contact utilization management for a referral.", "Inform the patient that authorization has been approved.", "Follow guidelines of the patient's insurance company on how to obtain a referral."], "answer": "Follow guidelines of the patient's insurance company on how to obtain a referral.", "category": "Insurance & Billing"}, {"num": 34, "question": "Which of the following statements made by a medical assistant demonstrates an understanding of required patient identification techniques?", "options": ["&quot;I will ask the patient to state and spell their full name and provide their date of birth before administering vaccines.&quot;", "&quot;I can look at the daily schedule to obtain the patient's name and the reason for the visit when checking the patient in.&quot;", "&quot;I can obtain the patient's name by looking in their chart before obtaining blood samples.&quot;", "&quot;I will ask a coworker to confirm the identity of the patient prior to collecting a urine specimen.&quot;"], "answer": "Ask the patient to state and spell their full name and provide their date of birth before administering vaccines.", "category": "General Medical Assisting"}, {"num": 35, "question": "Which of the following techniques should a medical assistant use to gather additional information from a patient who is having chest pain?", "options": ["Ask open-ended questions.", "Demonstrate empathy.", "Summarize patient information.", "Ask closed-ended questions."], "answer": "Ask open-ended questions.", "category": "General Medical Assisting"}, {"num": 36, "question": "A medical assistant is preparing to apply a transdermal patch for a patient. Which of the following is the correct method?", "options": ["Apply the patch directly to the skin to maintain effectiveness.", "Place the patch in the same area each time for even absorption.", "If the patch is torn during application, apply tape to secure it.", "Apply the patch on top of lotion to avoid skin irritation."], "answer": "Apply the patch directly to the skin to maintain effectiveness.", "category": "Pharmacology & Medications"}, {"num": 37, "question": "A clinical medical assistant is communicating during a telehealth visit with a patient who has partial hearing loss. Which of the following methods should the medical assistant use?", "options": ["Speak in a loud, high-pitched tone.", "Have the patient use magnification aids.", "Speak at a fast pace, avoiding pauses.", "Use real-time closed captioning."], "answer": "Use real-time closed captioning.", "category": "General Medical Assisting"}, {"num": 38, "question": "In Erikson's Stages of Psychosocial Development, which of the following stages is associated with an adolescent needing privacy and providing some independence?", "options": ["Trust vs. mistrust", "Identity vs. role confusion", "Initiative vs. guilt", "Intimacy vs. isolation"], "answer": "Identity vs. role confusion", "category": "General Medical Assisting"}, {"num": 39, "question": "A medical assistant is reviewing a patient's recent medical history and notes they have a healing fracture of the distal femur. In which of the following locations on the patient's body should the assistant expect to find the injury?", "options": ["Just below the shoulder", "Just above the elbow", "Just below the hip", "Just above the knee"], "answer": "Just above the knee", "category": "General Medical Assisting"}, {"num": 40, "question": "Which of the following provides informed treatment and encourages patients to take an active role in their individual health care, resulting in better compliance in treatment?", "options": ["Population health", "Community resources", "Patient education", "Continuity of care"], "answer": "Patient education", "category": "Patient Education & Health Coaching"}, {"num": 41, "question": "When assisting a provider with a punch biopsy of a mole, which of the following tasks should a medical assistant anticipate?", "options": ["Retract the edges of the biopsy site.", "Swab fluids from the biopsy site.", "Receive and prepare tissue specimens for processing.", "Place sutures at the incision site."], "answer": "Receive and prepare tissue specimens for processing.", "category": "Surgical Assisting & Procedures"}, {"num": 42, "question": "A provider places a sharps container in the linen hamper by mistake. Which of the following actions should the medical assistant take?", "options": ["Disinfect the contents of the linen hamper with bleach.", "\u200bDispose of the linen hamper's contents as a biohazard.", "\u200bPrepare a report for OSHA.", "Allow the biomedical waste company to sort accordingly."], "answer": "Dispose of the linen hamper's contents as a biohazard.", "category": "General Medical Assisting"}, {"num": 43, "question": "The duodenum is located in which of the following abdominopelvic quadrants?", "options": ["Right upper quadrant", "Left lower quadrant", "Left upper quadrant", "Right lower quadrant"], "answer": "Right upper quadrant", "category": "Anatomy & Medical Terminology"}, {"num": 44, "question": "A patient who has an acute illness calls to schedule an appointment. According to best practices, in which of the following time frames should the patient's appointment be scheduled for?", "options": ["The following clinic day", "The same day", "Within the next week", "Within an hour"], "answer": "The same day", "category": "Pharmacology & Medications"}, {"num": 45, "question": "In which of the following situations is a medical assistant required to wear sterile gloves?", "options": ["Performing a venipuncture to obtain blood culture samples", "Obtaining blood pressure level from a patient who has intact skin", "Processing specimens containing body fluids", "Passing instruments to a provider during a cyst removal"], "answer": "Passing instruments to a provider during a cyst removal", "category": "Infection Control & Safety"}, {"num": 46, "question": "The American Cancer Society (ACS) recommends female patients who are considered at average risk of breast cancer to start having yearly mammograms at which of the following ages?", "options": ["44 years old", "40 years old", "45 years old", "55 years old"], "answer": "45 years old", "category": "General Medical Assisting"}, {"num": 47, "question": "A medical assistant is performing a capillary puncture. Which of the following steps should the assistant take to promote blood flow?", "options": ["Keep the patient's hand above their head.", "Milk the patient's finger.", "Keep the patient's hand below heart level.", "Have the patient run cool water on their fingers."], "answer": "Keep the patient's hand below heart level.", "category": "General Medical Assisting"}, {"num": 48, "question": "A medical assistant is preparing to draw venous blood samples. OSHA regulations require the assistant to wear which of the following pieces of personal protective equipment while performing this procedure?", "options": ["Surgical mask", "Eye protection", "Gloves", "Gown"], "answer": "Gloves", "category": "Infection Control & Safety"}, {"num": 49, "question": "A provider examines a patient who has a lesion on their arm that requires daily wound care treatment. The patient is unable to perform wound care themselves. A medical assistant should anticipate a referral for this patient to which of the following ancillary services?", "options": ["Home health care", "Hospice care", "Diagnostic services", "Rehabilitation services"], "answer": "Home health care", "category": "Insurance & Billing"}, {"num": 50, "question": "A medical assistant is speaking with a patient who has seasonal allergies. Which of the following health care providers should the assistant identify as being able to make a diagnosis and initiate the necessary treatment?", "options": ["Respiratory therapist", "Physician assistant", "Registered nurse", "Pharmacist"], "answer": "Physician assistant", "category": "General Medical Assisting"}, {"num": 51, "question": "Which of the following techniques should a medical assistant use to put a 7-year-old child at ease prior to administering an injection?", "options": ["Show the child the needle that will be used for the procedure.", "Tell the child the procedure will not hurt.", "Explain the procedure to the child in simple steps.", "Use medical terminology when discussing the procedure with the child."], "answer": "Explain the procedure to the child in simple steps.", "category": "Pharmacology & Medications"}, {"num": 52, "question": "Which of the following articles is allowed by the professional dress code for a medical assistant?", "options": ["Necklace", "Jeans", "Watch", "Hoop earrings"], "answer": "Watch", "category": "Communication & Ethics"}, {"num": 53, "question": "A medical assistant is caring for a child who has varicella zoster virus. The assistant should recognize that varicella is spread through which of the following modes of transmission?", "options": ["Vector-borne", "Airborne", "Bloodborne", "Foodborne"], "answer": "Airborne", "category": "General Medical Assisting"}, {"num": 54, "question": "A medical assistant is preparing a patient to wear a Holter monitor. Which of the following instructions should the assistant include?", "options": ["&quot;You should avoid your regular exercise routine during monitoring.&quot;", "&quot;You will be required to wear the monitor for 2 to 4 hours.&quot;", "&quot;You can bathe and shower as usual during monitoring.&quot;", "&quot;You should avoid using an electric blanket during monitoring.&quot;"], "answer": "&quot;You should avoid using an electric blanket during monitoring.&quot;", "category": "Patient Education & Health Coaching"}, {"num": 55, "question": "A patient who has night blindness might be experiencing which the following vitamin deficiencies?", "options": ["Vitamin K", "Vitamin A", "Vitamin E", "Vitamin D"], "answer": "Vitamin A", "category": "General Medical Assisting"}, {"num": 56, "question": "When performing a first aid procedure to control bleeding of a wound, which of the following actions should a medical assistant take?", "options": ["Don sterile gloves.", "Suture the wound.", "Apply layers of sterile gauze.", "Flush the wound with sterile water."], "answer": "Apply layers of sterile gauze.", "category": "Emergency & First Aid"}, {"num": 57, "question": "When scheduling a routine Papanicolaou (Pap) test and Human papillomavirus (HPV) test for a 55-year-old patient, which of the following guidelines should the medical assistant follow?", "options": ["6 months to 1 year", "2 to 3 years", "1 to 2 years", "3 to 5 years"], "answer": "3 to 5 years", "category": "Scheduling & Office Operations"}, {"num": 58, "question": "A provider asks a medical assistant to assist with an orthopedic examination. Which of the following instruments should the assistant prepare for the examination?", "options": ["Tonometer", "Retractor", "Hemostat", "Goniometer"], "answer": "Goniometer", "category": "Surgical Assisting & Procedures"}, {"num": 59, "question": "When discharging a patient from a minor surgery, which of the following findings should a medical assistant instruct the patient to recognize as an expected part of the recovery process?", "options": ["Red streaks near wound", "Temperature reading of 38\u00b0 C (100.5\u00b0 F)", "Continuous bleeding from the wound", "Slight discomfort at surgery site"], "answer": "Slight discomfort at surgery site", "category": "General Medical Assisting"}, {"num": 60, "question": "Which of the following is an example of an involuntary movement by the patient that can lead to a somatic tremor artifact on a patient's EKG?", "options": ["Shivering due to coldness", "Talking to the assistant", "Supporting arms with adjacent table", "Chewing gum"], "answer": "Shivering due to coldness", "category": "EKG & Cardiac Procedures"}, {"num": 61, "question": "A medical assistant is preparing to use a glucometer to measure a patient's blood glucose level. Which of the following actions should the assistant take?", "options": ["Touch the testing pad on the test strip to make sure the surface is smooth.", "Smear the blood on the test pad.", "Apply the first drop of blood that appears after the puncture to the test strip.", "Obtain the blood sample after inserting the test strip into the glucometer."], "answer": "Obtain the blood sample after inserting the test strip into the glucometer.", "category": "General Medical Assisting"}, {"num": 62, "question": "A medical assistant receives a prescription to administer an intramuscular injection to a patient. Which of the following angles should the assistant use to administer the injection?", "options": ["15\u00b0", "45\u00b0", "90\u00b0", "10\u00b0"], "answer": "90\u00b0", "category": "Pharmacology & Medications"}, {"num": 63, "question": "A provider prescribed oxygen therapy for a patient who is experiencing labored breathing. Which of the following actions should a medical assistant take?", "options": ["Place a nasal cannula on the patient with a nasal prong in each nostril.", "Adjust the flow meter based on the patient's preference.", "Open the cylinder of the oxygen tank by turning the handle clockwise.", "Instruct the patient to take nitroglycerin prior to oxygen therapy."], "answer": "Place a nasal cannula on the patient with a nasal prong in each nostril.", "category": "General Medical Assisting"}, {"num": 64, "question": "A patient receives a referral to an oncologist. Which of the following types of office visit is this considered?", "options": ["Surgical visit", "Inpatient visit", "Established patient", "Consultation-office"], "answer": "Consultation-office", "category": "Insurance & Billing"}, {"num": 65, "question": "A medical assistant is labeling a blood sample for anemia. Which of the following tests should the assistant label on the requisition form?", "options": ["Erythrocyte sedimentation rate", "Hemoglobin A1C", "STAT-CRIT hematocrit", "Borrelia burgdorferi\u00a0antibodies"], "answer": "STAT-CRIT hematocrit", "category": "General Medical Assisting"}, {"num": 66, "question": "Which of the following should the medical assistant obtain from an insurance company prior to performing an outpatient surgery?", "options": ["Referral", "Explanation of benefits", "Remittance advice", "Preauthorization"], "answer": "Preauthorization", "category": "Insurance & Billing"}, {"num": 67, "question": "A medical assistant is preparing to perform venipuncture for a patient. According to order of draw, which of the following tubes should the assistant draw after obtaining blood cultures?", "options": ["SST", "Lavender", "Green", "Light blue"], "answer": "Light blue", "category": "Phlebotomy & Specimen Collection"}, {"num": 68, "question": "Based on The Joint Commission's (TJC) \"Do Not Use\" list, which of the following should the medical assistant recognize as easily mistaken and should avoid using when documenting in the electronic medical record?", "options": ["0.5 mg", "prn", "QD", "unit"], "answer": "QD", "category": "Medical Records & Documentation"}, {"num": 69, "question": "Which of the following types of allergy testing involves applying an allergen to the skin to help detect delayed allergic reactions?", "options": ["Intradermal testing", "Radioallergosorbent testing", "Patch testing", "Percutaneous testing"], "answer": "Patch testing", "category": "Emergency & First Aid"}, {"num": 70, "question": "Which of the following is a medical assistant's priority action when handling a call from a patient who is upset about a prescription refill?", "options": ["Get the caller off the phone to avoid further negative interaction.", "Stay calm and talk to client in an empathetic tone.", "Defend the actions and let the patient know why these actions were taken.", "Place the caller on hold and get the doctor."], "answer": "Stay calm and talk to client in an empathetic tone.", "category": "Pharmacology & Medications"}, {"num": 71, "question": "Which of the following strategies demonstrates empathy when a medical assistant is interacting with a patient who is upset?", "options": ["Interacting near the patient", "Exhibiting active listening skills", "Limiting the amount of information disclosed to the patient", "Using closed-ended questions"], "answer": "Exhibiting active listening skills", "category": "Communication & Ethics"}, {"num": 72, "question": "A medical assistant is checking a patient in for a sex reassignment preoperative appointment. How should the assistant identify the patient's gender?", "options": ["Address the patient using their assigned birth sex.", "Identify the patient as queer.", "Address the patient as they wish.", "Identify the patient as gay."], "answer": "Address the patient as they wish.", "category": "Scheduling & Office Operations"}, {"num": 73, "question": "Which of the following members of the health care team specializes in serving as a guide to help patients with chronic illnesses through the health care system?", "options": ["Patient navigator", "Medical interpreter", "Patient coach", "Medical registrar"], "answer": "Patient navigator", "category": "Anatomy & Medical Terminology"}, {"num": 74, "question": "Which of the following sterilization methods is being used with an autoclave device?", "options": ["Ionizing radiation", "Moist heat", "Ultraviolet light", "Dry heat"], "answer": "Moist heat", "category": "Infection Control & Safety"}, {"num": 75, "question": "A temperature of 37.6\u00b0 C would equal which of the following when converted to Fahrenheit?", "options": ["99.6\u00b0 F", "98.6\u00b0 F", "95.6\u00b0 F", "97.6\u00b0 F"], "answer": "99.6\u00b0 F", "category": "Vital Signs & Measurements"}, {"num": 76, "question": "A medical assistant is preparing to perform an EKG on a 3-year-old patient. Which of the following is an appropriate action for the assistant to take before the procedure?", "options": ["Ask the parent to hold the child during the procedure.", "Tell the child the procedure will not hurt.", "Require the parents to leave the room.", "Restrain the child."], "answer": "Ask the parent to hold the child during the procedure.", "category": "EKG & Cardiac Procedures"}, {"num": 77, "question": "Which of the following types of masks is considered a respirator and required when caring for a patient who has COVID-19?", "options": ["Cloth mask", "N-95 mask", "Clear plastic panel", "Surgical mask"], "answer": "N-95 mask", "category": "Infection Control & Safety"}, {"num": 78, "question": "A medical assistant is preparing to calculate a patient's heart rate from an EKG tracing. Which of the following methods should the assistant use for this calculation?", "options": ["\u200bCount the number of large boxes between the P and T waves.", "\u200bDivide 1,500 by the number of small boxes between two R waves.", "Calculate the mean rate and divide 1,500 by that rate.", "Count the number of small boxes in two cardiac cycles."], "answer": "Divide 1,500 by the number of small boxes between two R waves.", "category": "EKG & Cardiac Procedures"}, {"num": 79, "question": "Which of the following conditions refers to when the internal environment functions properly and all the organs are performing appropriately?", "options": ["Phagocytosis", "Mitosis", "Necrosis", "Homeostasis"], "answer": "Homeostasis", "category": "Anatomy & Medical Terminology"}, {"num": 80, "question": "Which of the following is a component of a patient's electronic health record (EHR)?", "options": ["Insurance credentialing documents", "Laboratory test results", "Electronic claim denials", "Compiled list of patients"], "answer": "Laboratory test results", "category": "Medical Records & Documentation"}, {"num": 81, "question": "A provider has ordered hematology testing for a patient. Which of the following tube colors should a medical assistant use?", "options": ["Gold", "Light blue", "Lavender", "Red"], "answer": "Lavender", "category": "Laboratory Procedures"}, {"num": 82, "question": "Aside from verifying a patient's full name and date of birth, which of the following patient identifiers would a medical assistant recognize as unique to an individual patient?", "options": ["Medical record number", "Zip code", "Health insurance group number", "Place of employment and address"], "answer": "Medical record number", "category": "General Medical Assisting"}, {"num": 83, "question": "A medical assistant is reporting a patient fall that occurred in the front lobby of the clinic. When considering patient safety guidelines, which of the following is the purpose of completing an incident report?", "options": ["To create documentation for the patient's medical record", "To document patient responsibility for the fall", "To remove liability from the clinic", "To avoid future reoccurrences"], "answer": "To avoid future reoccurrences", "category": "General Medical Assisting"}, {"num": 84, "question": "Which of the following conditions places the patient at the highest risk for stroke or transient-ischemic attack?", "options": ["Peripheral artery disease", "Carotid artery disease", "Coronary heart disease", "Coronary microvascular disease"], "answer": "Carotid artery disease", "category": "General Medical Assisting"}, {"num": 85, "question": "A patient weighs 78 kg. Which of the following represents the patient's weight converted into pounds?", "options": ["171.6 lb", "191.6 lb", "149.6 lb", "179.6 lb"], "answer": "171.6 lb", "category": "General Medical Assisting"}, {"num": 86, "question": "A medical assistant should assist an adult patient into which of the following positions when obtaining the patient's height measurement?", "options": ["Sitting laterally to the scale", "Standing facing the scale", "Standing with their back to the scale", "Lying down on the exam table"], "answer": "Standing with their back to the scale", "category": "General Medical Assisting"}, {"num": 87, "question": "Which of the following can cause a hemolyzed specimen?", "options": ["Inverting the specimen four times", "Shaking the collection tube vigorously", "Allowing the specimen to clot", "Partially filling the collection tube"], "answer": "Shaking the collection tube vigorously", "category": "Laboratory Procedures"}, {"num": 88, "question": "When working in a culturally diverse practice, which of the following actions should a medical assistant take to overcome diversity and communication barriers?", "options": ["Maintain a common greeting for patients across cultures.", "Examine personal religious, cultural values, and beliefs to identify any biases.", "Use a patient's appearance to determine their lifestyle choices.", "Request a family member's assistance when speaking with a patient who does not speak the same language."], "answer": "Examine personal religious, cultural values, and beliefs to identify any biases.", "category": "Communication & Ethics"}, {"num": 89, "question": "Which of the following routes for taking a patient's temperature is the most accurate?", "options": ["Temporal", "Oral", "Rectal", "Axillary"], "answer": "Rectal", "category": "Vital Signs & Measurements"}, {"num": 90, "question": "The abbreviation \"ac\" stands for which of the following?", "options": ["Before eating", "Twice per day", "Three times per day", "Nothing by mouth"], "answer": "Before eating", "category": "Anatomy & Medical Terminology"}, {"num": 91, "question": "Which of the following eating disorders is demonstrated by purging, use of laxatives, and mood swings?", "options": ["Anorexia nervosa", "Compulsive overeating", "Bulimia nervosa", "Binge eating disorder"], "answer": "Bulimia nervosa", "category": "General Medical Assisting"}, {"num": 92, "question": "A medical assistant is preparing the autoclave for the sterilization process. Which of the following temperatures is recommended to effectively perform sterilization?", "options": ["121\u00b0 to 123\u00b0 C (250\u00b0 to 255\u00b0 F)", "82\u00b0 to 85\u00b0 C (180\u00b0 to 185\u00b0 F)", "66\u00b0 to 68\u00b0 C (150\u00b0 to 155\u00b0 F)", "138\u00b0 to 141\u00b0 C (280\u00b0 to 285\u00b0 F)"], "answer": "121\u00b0 to 123\u00b0 C (250\u00b0 to 255\u00b0 F)", "category": "Infection Control & Safety"}, {"num": 93, "question": "Which of the following organs in the urinary system triggers micturition?", "options": ["Kidneys", "Ureters", "Urethra", "Bladder"], "answer": "Bladder", "category": "Anatomy & Medical Terminology"}, {"num": 94, "question": "Which of the following procedures takes into consideration the 3 Ds \u2013 depth, diameter, and direction?", "options": ["Venipuncture procedure", "Wound care process", "Pulmonary function test", "Capillary puncture"], "answer": "Capillary puncture", "category": "General Medical Assisting"}, {"num": 95, "question": "A medical assistant is preparing a patient for a vaginal examination and Papanicolaou (Pap) test. In which of the following positions should the assistant place the patient for this procedure?", "options": ["Lateral semi-prone recumbent position", "Prone position", "Lithotomy position", "Fowler's position"], "answer": "Lithotomy position", "category": "General Medical Assisting"}, {"num": 96, "question": "Which of the following is the term for the allergy test that involves small injections just under the skin?", "options": ["Intradermal test", "Patch test", "Radioallergosorbent (RAST) test", "Percutaneous test"], "answer": "Intradermal test", "category": "Pharmacology & Medications"}, {"num": 97, "question": "Which of the following patient conditions is appropriate for a telehealth visit with a provider?", "options": ["Diabetes", "Visual acuity", "Hydrocephalus", "Impacted cerumen"], "answer": "Diabetes", "category": "General Medical Assisting"}, {"num": 98, "question": "According to the CDC, which of the following information must be included on a vaccine inventory log?", "options": ["Manufacturer", "Refrigerator temperature", "Date vaccine was ordered", "Patient's medical record number"], "answer": "Refrigerator temperature", "category": "Scheduling & Office Operations"}, {"num": 99, "question": "Which of the following examinations assesses a patient's color perception and aids in detecting color blindness?", "options": ["Ishihara test", "Distance visual acuity", "Anthropomorphic measurements", "Audiometric testing"], "answer": "Ishihara test", "category": "General Medical Assisting"}, {"num": 100, "question": "Which of the following medical asepsis techniques should a medical assistant use to ensure work surfaces are free of infectious diseases?", "options": ["Disinfection", "Alcohol-based hand sanitizer", "Sanitization", "Ionizing radiation"], "answer": "Disinfection", "category": "Infection Control & Safety"}, {"num": 101, "question": "According to the CDC, which of the following should be done if a medical assistant's hands are visibly soiled?", "options": ["Use soap and water, and scrub for a maximum of 15 seconds.", "Use an alcohol-based hand sanitizer for a minimum of 15 seconds.", "Use an alcohol-based hand sanitizer for a maximum of 15 seconds.", "Use soap and water, and scrub for a minimum of 15 seconds."], "answer": "Use soap and water, and scrub for a minimum of 15 seconds.", "category": "General Medical Assisting"}, {"num": 102, "question": "While completing the clinical intake process, a patient informs a medical assistant they are having suicidal thoughts. Which of the following actions should the assistant take?", "options": ["The medical assistant should comment about the patient's feelings.", "The medical assistant should talk to their friend about the patient.", "The medical assistant should not document the patient's statement.", "The medical assistant should document what the patient states and relay the information to the provider."], "answer": "Document what the patient states and relay the information to the provider.", "category": "General Medical Assisting"}, {"num": 103, "question": "Which of the following questions should a medical assistant ask a patient prior to venipuncture?", "options": ["&quot;How many times have you had your blood drawn?&quot;", "&quot;What color tube would you like me to draw first?&quot;", "&quot;Will you please state and spell your name for me?&quot;", "&quot;Do you have any family history of blood diseases?&quot;"], "answer": "&quot;Will you please state and spell your name for me?&quot;", "category": "Phlebotomy & Specimen Collection"}, {"num": 104, "question": "A patient is upset and states, \"The hospital and insurance company are just trying to get money. I eat good and exercise, so I know I don't have cancer.\" The medical assistant should recognize the patient is using which of the following defense mechanisms to cope with their cancer diagnosis?", "options": ["Rationalization", "Displacement", "Repression", "Suppression"], "answer": "Rationalization", "category": "Insurance & Billing"}, {"num": 105, "question": "Which of the following is the preferred site when performing venipuncture on children younger than age 2?", "options": ["Cephalic vein", "Dorsal hand vein", "Medial veins", "Basilic"], "answer": "Cephalic vein", "category": "Phlebotomy & Specimen Collection"}, {"num": 106, "question": "A medical assistant is administering ear drops to an adult patient. Which of the following actions should the assistant take?", "options": ["Pull the pinna down and back before instilling the drops.", "Hold the dropper at least 2.5 cm (1 in) above the ear canal.", "Warm the medication bottle before instilling the drops.", "Have the patient lie supine on the examination table."], "answer": "Warm the medication bottle before instilling the drops.", "category": "General Medical Assisting"}, {"num": 107, "question": "A medical assistant is communicating with a patient's best friend, who is making decisions regarding the medical care of the patient, who is comatose. In which of the following capacities is the patient's friend acting?", "options": ["Financial power of attorney", "Durable power of attorney for health care", "Advance medical directive", "Legal guardian"], "answer": "Durable power of attorney for health care", "category": "General Medical Assisting"}, {"num": 108, "question": "A medical assistant is scheduling a patient for an outpatient procedure. Which of the following actions should the assistant take first?", "options": ["Contact the patient to find out their availability for the procedure.", "Obtain prior authorization for the procedure with the patient's insurance company.", "\u200bObtain an oral or written order from the provider for the procedure.", "\u200bCall the outpatient facility to inquire about available days and times for the procedure."], "answer": "Obtain an oral or written order from the provider for the procedure.", "category": "Scheduling & Office Operations"}, {"num": 109, "question": "A medical assistant is performing a 12-lead EKG on a patient. The assistant should recognize that Lead I is recording which of the following?", "options": ["The electrical activity of the right atrium", "The electrical activity of the right ventricle", "The electrical activity of the left ventricle", "The electrical activity of the left atrium"], "answer": "The electrical activity of the left ventricle", "category": "EKG & Cardiac Procedures"}, {"num": 110, "question": "Which of the following is a common root word?", "options": ["arthr", "a", "itis", "dys"], "answer": "arthr", "category": "Anatomy & Medical Terminology"}, {"num": 111, "question": "A patient is newly diagnosed with diabetes and is learning to self-administer insulin injections. Which of the following methods should a medical assistant use to determine the patient understands the instructions for performing the injections?", "options": ["Have the patient verbally explain how to perform the procedure.", "Have the patient demonstrate the technique", "Have the patient's family demonstrate how to perform the injection to the patient.", "Have the patient nod in understanding for each step of the procedure."], "answer": "Have the patient demonstrate the technique", "category": "Pharmacology & Medications"}, {"num": 112, "question": "Which of the following are considered the two greatest sources of contamination once a sterile field is established?", "options": ["Breath and hair", "Hands and elbows", "Hands and hair", "Elbows and breath"], "answer": "Hands and hair", "category": "Infection Control & Safety"}, {"num": 113, "question": "A provider is trying to rule out coronary artery disease and wants to examine the patient's blood flow direction and speed. Which of the following cardiology diagnostic procedures should the medical assistant schedule?", "options": ["Transthoracic echocardiogram", "Doppler ultrasound", "Transesophageal echocardiogram", "Cardiac catheterization"], "answer": "Doppler ultrasound", "category": "Pharmacology & Medications"}, {"num": 114, "question": "Which of the following procedures requires a medical assistant to perform a surgical scrub prior to assisting?", "options": ["Stress test", "Sigmoidoscopy", "Scratch test", "Needle biopsy"], "answer": "Needle biopsy", "category": "Surgical Assisting & Procedures"}, {"num": 115, "question": "A medical assistant discovers a garbage can fire has started in the break room of the medical office. According to the RACE acronym for emergency response, which of the following actions should the assistant take first?", "options": ["Turn off the oxygen in the adjacent examination rooms.", "Evacuate staff and patients from the immediate area.", "Close the doors and windows.", "Use the office fire extinguisher."], "answer": "Evacuate staff and patients from the immediate area.", "category": "Emergency & First Aid"}, {"num": 116, "question": "A medical assistant is preparing to assist a provider with suturing a wound. Which of the following items should the assistant include in the sterile field for this procedure?", "options": ["Skin retractor", "Scalpel", "Needle holder", "Bandages"], "answer": "Needle holder", "category": "Infection Control & Safety"}, {"num": 117, "question": "A medical assistant works at a practice that is part of an Accountable Care Organization (ACO). This designation means the practice's health care team will focus on improving care for patients who have which of the following types of medical coverage?", "options": ["Health maintenance organization (HMO)", "Preferred provider organization (PPO)", "Medicare", "Medicaid"], "answer": "Medicare", "category": "Anatomy & Medical Terminology"}, {"num": 118, "question": "When coaching a patient, which of the following is an example of encouraging compliance with the treatment plan?", "options": ["Providing a patient with information about colon cancer screenings", "Providing instructions about effective hand washing", "Explaining how and when to perform a self-breast exam", "Providing an instructional video based on the patient's learning style"], "answer": "Providing an instructional video based on the patient's learning style", "category": "Medical Records & Documentation"}, {"num": 119, "question": "After collecting a urine specimen from a patient, within which of the following timeframes should the medical assistant process the specimen?", "options": ["3 hr", "1 hr", "2 hr", "4 hr"], "answer": "2 hr", "category": "Laboratory Procedures"}, {"num": 120, "question": "At work, a medical assistant cared for a neighbor who sustained multiple injuries in a fall. After work, another neighbor asks the assistant what happened to the neighbor who fell. Following the American Association of Medical Assistants' (AAMA) Code of Ethics, which of the following responses should the assistant make?", "options": ["&quot;It was nothing serious. You'll see her soon enough.&quot;", "&quot;She broke a couple of bones, but she'll be fine.&quot;", "&quot;We'll see her every week or so during her recovery.&quot;", "&quot;I can't share any information about what happens at my job.&quot;"], "answer": "&quot;I can't share any information about what happens at my job.&quot;", "category": "Infection Control & Safety"}, {"num": 121, "question": "Which of the following methods is used to notify a provider of the denial of a claim by an insurance carrier?", "options": ["CMS-1500 claim form", "Eligibility for insurance", "Remittance advice", "Coordination of benefits"], "answer": "Remittance advice", "category": "Insurance & Billing"}, {"num": 122, "question": "Which of the following respiration rates falls into the expected reference range for a 9-year-old child?", "options": ["12/min", "19/min", "40/min", "30/min"], "answer": "19/min", "category": "Vital Signs & Measurements"}, {"num": 123, "question": "A medical assistant is preparing a patient for suture closure of 0.5 mm diameter. The assistant should have which of the following suture sizes ready for the provider?", "options": ["0", "3", "2", "1"], "answer": "3", "category": "Surgical Assisting & Procedures"}, {"num": 124, "question": "When assisting a provider with a medical emergency, the medical assistant should recognize that which of the following types of shock involves an excessive loss of blood or other bodily fluids?", "options": ["Cardiogenic shock", "Hypovolemic shock", "Anaphylactic shock", "Neurogenic shock"], "answer": "Hypovolemic shock", "category": "Emergency & First Aid"}, {"num": 125, "question": "When preparing for a patient's scheduled office visit, which of the following components of the medical history should a medical assistant review to identify any surgeries the patient has had?", "options": ["Chief complaint", "History of present illness", "Past medical history", "Demographic information"], "answer": "Past medical history", "category": "Pharmacology & Medications"}, {"num": 126, "question": "When managing safe handling and storage of vaccines, which of the following actions should a medical assistant take?", "options": ["Update the health department's vaccine management policies on an annual basis.", "Store food and drinks in the vaccine refrigerator on a separate shelf.", "Place a thermometer in both the refrigerator and the freezer.", "Store commonly accessed vaccines in the door shelves."], "answer": "Place a thermometer in both the refrigerator and the freezer.", "category": "General Medical Assisting"}, {"num": 127, "question": "A medical assistant is providing a patient with community resource information. Which of the following resources provides medical care for patients and their families dealing with end-of-life issues?", "options": ["Patient-Centered Medical Home", "Home health care", "Palliative care", "Hospice care"], "answer": "Hospice care", "category": "General Medical Assisting"}, {"num": 128, "question": "Which of the following is a crucial process used to ensure reliability of test results by detecting and eliminating errors?", "options": ["Quality control", "Hand hygiene", "Medical asepsis", "Infection contro"], "answer": "Quality control", "category": "General Medical Assisting"}, {"num": 129, "question": "Which of the following instructions should a medical assistant provide to a patient regarding transdermal patch use and care?", "options": ["&quot;Only sponge baths are allowed while wearing the patch.&quot;", "&quot;Apply each new patch at a different time during the day.&quot;", "&quot;Make sure to rotate the patch's placement to avoid skin irritation.&quot;", "&quot;Keep all used patches for inspection at your next appointment.&quot;"], "answer": "&quot;Make sure to rotate the patch's placement to avoid skin irritation.&quot;", "category": "Pharmacology & Medications"}, {"num": 130, "question": "Which of the following pieces of legislation keeps health care staff safe from retaliation by their employers when they report cases of patient neglect and abuse?", "options": ["Good Samaritan Act", "Patients' Bill of Rights", "HITECH Act", "Whistleblower Protection Act"], "answer": "Whistleblower Protection Act", "category": "General Medical Assisting"}, {"num": 131, "question": "A medical assistant is composing business correspondence using the simplified letter style. Which of the following features should the assistant use?", "options": ["A complimentary closing", "The sender's name is in all capital letters", "Center aligned dateline and salutation", "Indented paragraphs in the body of the letter"], "answer": "The sender's name is in all capital letters", "category": "General Medical Assisting"}, {"num": 132, "question": "Which of the following forms collected during new patient check-in will contain the patient's demographic information?", "options": ["Patient registration form", "Patient medical history form", "Physical examination form", "Informed consent form"], "answer": "Patient registration form", "category": "Scheduling & Office Operations"}, {"num": 133, "question": "A patient's laboratory report indicates a hemoglobin level of 7 g/dL. Which of the following is the first action a medical assistant should take?", "options": ["Repeat the test to ensure accuracy.", "Notify the provider.", "Inform the patient.", "Record the results in the medical record."], "answer": "Notify the provider.", "category": "Laboratory Procedures"}, {"num": 134, "question": "Computerized physician order entry (CPOE) is one of the requirements to help increase reimbursements from Medicare and Medicaid. Which of the following is an advantage of CPOE?", "options": ["The medical assistant does not have to see the provider face to face.", "The program helps to reduce errors.", "The program is only used for the input of medication orders.", "The program removes the pitfalls of faxing information."], "answer": "The program helps to reduce errors.", "category": "Insurance & Billing"}, {"num": 135, "question": "A medical assistant is preparing a patient for an examination of their back and hip. The assistant should place the patient into which of the following positions?", "options": ["Fowler's position", "Prone position", "Lithotomy position", "Supine position"], "answer": "Prone position", "category": "General Medical Assisting"}, {"num": 136, "question": "A medical assistant is screening last night's phone messages. Which of the following conditions requires an urgent appointment?", "options": ["Gout", "Gastroesophageal reflux", "Hypothyroidism", "Hypersensitivity"], "answer": "Hypersensitivity", "category": "Scheduling & Office Operations"}, {"num": 137, "question": "Which of the following agencies develops the guidelines for sending prescriptions electronically?", "options": ["cdc", "OSHA", "FDA", "DEA"], "answer": "DEA", "category": "Pharmacology & Medications"}, {"num": 138, "question": "Which of the following spatial considerations should the medical assistant make when checking in a patient?", "options": ["0 to 18 inches", "4 to 12 feet", "12 or more feet", "18 inches to 4 feet"], "answer": "18 inches to 4 feet", "category": "General Medical Assisting"}, {"num": 139, "question": "When a medical assistant is communicating with a patient who is upset, which of the following mechanisms indicates the assistant is receptive and listening?", "options": ["Rubbing the patient's back", "Smiling at the patient", "Staring at the patient", "Maintaining an open posture toward the patient"], "answer": "Maintaining an open posture toward the patient", "category": "Communication & Ethics"}, {"num": 140, "question": "Which of the following actions should a medical assistant take after completing a venipuncture procedure to ensure bleeding has stopped?", "options": ["Quickly remove needle, engaging the safety device.", "Apply pressure to the venipuncture site using gauze.", "Label the patient tubes.", "Apply a hypoallergenic self-stick wrap or bandage to the venipuncture site."], "answer": "Apply pressure to the venipuncture site using gauze.", "category": "Phlebotomy & Specimen Collection"}, {"num": 141, "question": "When unloading an autoclave machine, a medical assistant notices spots on the instruments. The assistant should recognize this is a result of which of the following?", "options": ["Exposure to hard chemicals", "Clogged chamber drain", "Improper cleaning of the chamber", "Mineral deposits from tap water"], "answer": "Mineral deposits from tap water", "category": "Surgical Assisting & Procedures"}, {"num": 142, "question": "A medical assistant is checking a patient's hearing using the Rinne test. Which of the following actions should the assistant take?", "options": ["Place headphones over the patient's ears and adjust for comfort.", "Position the vibrating tuning fork on the top of the patient's head.", "Ask the patient to raise their hand when they no longer hear any sound.", "Invert the vibrating tuning fork and place it 5 cm (2 in) in front of the ear canal."], "answer": "Invert the vibrating tuning fork and place it 5 cm (2 in) in front of the ear canal.", "category": "Diagnostic Testing & Screening"}, {"num": 143, "question": "A patient reports severe headaches and chronic tingling in their arms and legs. To which of the following specialties should the provider refer the patient for a consultation?", "options": ["General surgery", "Internal medicine", "Neurology", "Ophthalmology"], "answer": "Neurology", "category": "General Medical Assisting"}, {"num": 144, "question": "A medical assistant is performing intake for a 6-month-old patient. Which of the following measurements is required to complete the pediatric growth chart?", "options": ["Waist circumference", "Body mass index (BMI)", "Head circumference", "Pain level"], "answer": "Head circumference", "category": "Medical Records & Documentation"}, {"num": 145, "question": "A medical assistant should educate a patient on which of the following prior to scheduling a pulmonary function test?", "options": ["The patient should be instructed to drink 240 mL (8 oz) of water 1 hr prior to the test.", "The patient should be instructed on how to sit for the test.", "The patient should be instructed not to smoke 1 hr before the test.", "The patient should be educated on the importance of taking a sedative prior to the test."], "answer": "The patient should be instructed not to smoke 1 hr before the test.", "category": "Scheduling & Office Operations"}, {"num": 146, "question": "A medical assistant is completing a clinical intake and the patient reports experiencing fainting episodes. Which of the following would be the correct terminology for the assistant to document as the patient's chief complaint?", "options": ["Sinus rhythm", "Bradycardia", "Syncope", "Bradypnea"], "answer": "Syncope", "category": "General Medical Assisting"}, {"num": 147, "question": "A medical assistant is reinforcing instructions with a patient about how to take a buccal tablet. Which of the following instructions should the assistant give the patient?", "options": ["&quot;Place the tablet between your gums and cheek.&quot;", "&quot;Dissolve the tablet in water.&quot;", "&quot;Swallow the tablet whole.&quot;", "&quot;Place the tablet under your tongue.&quot;"], "answer": "&quot;Place the tablet between your gums and cheek.&quot;", "category": "Patient Education & Health Coaching"}, {"num": 148, "question": "Which of the following types of providers are exempt from electronic claims by Medicare?", "options": ["Single provider practices", "Ambulatory centers", "Long-term care centers", "Practices greater than 100 employees"], "answer": "Single provider practices", "category": "Insurance & Billing"}, {"num": 149, "question": "Which of the following diseases should a medical assistant recognize as mandatorily reportable to the state?", "options": ["Respiratory syncytial virus (RSV)", "Tuberculosis", "Influenza", "Gestational diabetes"], "answer": "Tuberculosis", "category": "General Medical Assisting"}, {"num": 150, "question": "Which of the following individual diversity factors may result in a patient's bias toward receiving medical treatment?", "options": ["Age", "Language", "Religion", "Gender"], "answer": "Religion", "category": "Communication & Ethics"}, {"num": 151, "question": "A medical assistant can provide patient care coordination and community resources through which of the following roles?", "options": ["Medical technologist", "Occupational therapist", "Physician assistant", "Patient navigator"], "answer": "Patient navigator", "category": "General Medical Assisting"}, {"num": 152, "question": "A medical assistant is measuring the vital signs of an adult patient. The assistant should identify which of the following blood pressure readings as stage 2 hypertension?", "options": ["150/95 mm Hg", "110/80 mm Hg", "135/80 mm Hg", "120/85 mm Hg"], "answer": "150/95 mm Hg", "category": "Vital Signs & Measurements"}, {"num": 153, "question": "Which of the following is important when a medical assistant is verbally communicating with a patient?", "options": ["The assistant should communicate aggressively.", "The assistant should speak loudly.", "The assistant should be clear and concise.", "The assistant should be passive."], "answer": "The assistant should be clear and concise.", "category": "General Medical Assisting"}, {"num": 154, "question": "When a medical assistant is unsure if a patient has been exposed to an infectious organism, which of the following processes should the assistant follow?", "options": ["Environmental protection", "Universal precautions", "Bloodborne pathogens standard", "Surgical asepsis"], "answer": "Universal precautions", "category": "Anatomy & Medical Terminology"}, {"num": 155, "question": "Which of the following statements is true of a schedule III drug?", "options": ["The prescriber can authorize prescription refills over the phone.", "The prescription cannot include refills", "The prescriber must submit the written prescription to the pharmacy within 7 days of phoning into the pharmacy.", "The prescriber must call in the prescription to the pharmacy."], "answer": "The prescriber can authorize prescription refills over the phone.", "category": "Pharmacology & Medications"}, {"num": 156, "question": "A medical assistant has a prescription to obtain a CBC, basic metabolic panel, lactic acid, and a PT/INR from an older adult patient who has small veins. Which of the followings methods of draw should the assistant use?", "options": ["Capillary method", "Evacuated system method", "Butterfly method", "Syringe method"], "answer": "Butterfly method", "category": "Pharmacology & Medications"}, {"num": 157, "question": "For which of the following reasons should a medical assistant place a specimen in a biohazard specimen bag when transporting to an outside laboratory?", "options": ["The biohazard bag prevents a potential exposure incident.", "The biohazard bag maintains the proper in vitro characteristics of the specimen.", "The biohazard bag allows the whole blood specimen to be placed in the freezer.", "The biohazard bag ensures prompt transportation of the specimen."], "answer": "The biohazard bag prevents a potential exposure incident.", "category": "Infection Control & Safety"}, {"num": 158, "question": "According to the Controlled Substances Act, which of the following is true regarding the storage of controlled substances in the office?", "options": ["Controlled medications should be stored in the examining room.", "Controlled medications and non-narcotic medications should be stored together.", "Controlled medications should be stored in sunlight.", "Controlled medications should be stored in a locked cabinet."], "answer": "Controlled medications should be stored in a locked cabinet.", "category": "Pharmacology & Medications"}, {"num": 159, "question": "A medical assistant is preparing to clean and remove debris from instruments that were used in a minor surgery. Which of the following processes should the assistant use?", "options": ["Steam sterilization", "Sanitization", "Disinfection", "Chemical sterilization"], "answer": "Sanitization", "category": "Surgical Assisting & Procedures"}, {"num": 160, "question": "A medical assistant is disposing of the syringe and needle used to administer a seasonal influenza vaccine. Which of the following actions should the assistant take?", "options": ["Replace the biohazardous sharps container once it is half full.", "Drop the syringe, needle first, into the biohazardous sharps container.", "Use a gauze square to break off the needle and place it in the biohazardous sharps container.", "Recap the needle before discarding it in the biohazardous sharps container."], "answer": "Drop the syringe, needle first, into the biohazardous sharps container.", "category": "Phlebotomy & Specimen Collection"}, {"num": 161, "question": "A medical assistant should identify that which of the following hematocrit values is out of the expected reference range?", "options": ["A 46-year-old female patient who has a hematocrit reading of 32%", "A 44-year-old male patient who has a hematocrit reading of 46%", "A 29-year-old male patient who has a hematocrit reading of 50%", "A 28-year-old female patient who has a hematocrit reading of 39%"], "answer": "A 46-year-old female patient who has a hematocrit reading of 32%", "category": "General Medical Assisting"}, {"num": 162, "question": "A medical assistant has just finished disinfecting a patient examination room. When should the assistant remove their personal protective equipment (PPE)?", "options": ["Remove PPE in hallway and place in hallway trashcan.", "Remove PPE before leaving the patient examination room.", "Leave the patient examination room and remove PPE in the employee restroom.", "Before patient leaves, ask for help removing the PPE."], "answer": "Remove PPE before leaving the patient examination room.", "category": "Infection Control & Safety"}, {"num": 163, "question": "Which of the following assessments of a patient's pulse is demonstrated by an extremely strong and full feeling?", "options": ["Thready pulse", "Bradycardia", "Bounding pulse", "Dysrhythmia"], "answer": "Bounding pulse", "category": "Vital Signs & Measurements"}, {"num": 164, "question": "A medical assistant is preparing to complete an 837P/CMS-1500 claim form. Which of the following components of the form identifies the practitioner who provided the submitted services?", "options": ["National provider identifier (NPI)", "Patient's account number", "Employer identification number (EIN)", "Service facility location information"], "answer": "National provider identifier (NPI)", "category": "Insurance & Billing"}, {"num": 165, "question": "Which of the following methods is the best way to measure the amount of body fat on a patient?", "options": ["Body mass index (BMI)", "Vital signs", "Body mechanics", "Basal metabolic rate"], "answer": "Body mass index (BMI)", "category": "General Medical Assisting"}, {"num": 166, "question": "Which of the following health care plans will provide medical care for indigent patients who meet specific eligibility requirements?", "options": ["Medicaid", "CHAMPVA", "Workers' compensation", "Tricare"], "answer": "Medicaid", "category": "Medical Records & Documentation"}, {"num": 167, "question": "Which of the following patient-centered medical home (PCMH) functions requires communication among patients, families, and all members of the care team?", "options": ["Medical billing process", "Coordinated care", "Patient safety", "Inventory control system"], "answer": "Coordinated care", "category": "Communication & Ethics"}, {"num": 168, "question": "Which of the following is an advantage of using an electronic practice management software for scheduling appointments?", "options": ["Ability to generate reports", "Extended patient wait time when scheduling", "Limited search features", "Single user access at one time"], "answer": "Ability to generate reports", "category": "Scheduling & Office Operations"}, {"num": 169, "question": "Which of the following components of a business letter contains the conveyed message to the receiver?", "options": ["Reference line", "Copy notation", "Subject line", "Body of letter"], "answer": "Body of letter", "category": "General Medical Assisting"}, {"num": 170, "question": "Which of the following actions should a medical assistant take when obtaining the length of an infant during a well-child visit?", "options": ["Keep the infant's knees flexed.", "Position the infant on their back.", "Remove the infant's diaper.", "Wrap the infant in a blanket for warmth."], "answer": "Position the infant on their back.", "category": "General Medical Assisting"}, {"num": 171, "question": "A provider has requested a dissecting instrument on a sterile tray that a medical assistant is preparing. Which of the following instruments should the assistant include on the tray?", "options": ["Thumb forceps", "Probes", "Retractors", "Scissors"], "answer": "Scissors", "category": "Infection Control & Safety"}, {"num": 172, "question": "Upon entering a patient's room for a routine blood draw, a medical assistant sees a clergy member is with the patient. Which of the following actions should the assistant take?", "options": ["\u200bMark requisition &quot;unable to draw at this time.&quot;", "Wait in the patient's room until the clergy member leaves.", "\u200bReturn after drawing other patients.", "\u200bProceed with the draw."], "answer": "Return after drawing other patients.", "category": "Phlebotomy & Specimen Collection"}, {"num": 173, "question": "If a provider writes a prescription for a patient to take a medication BID, how many times a day should the patient take the medication?", "options": ["Once", "Three times", "Four times", "Twice"], "answer": "Twice", "category": "Pharmacology & Medications"}, {"num": 174, "question": "A medical assistant in an acute care facility is checking in a patient who has a deep laceration. The patient tells the assistant they cannot accept blood transfusions due to their religious beliefs. Which of the following actions should the assistant take?", "options": ["Inform the patient a transfusion is mandatory for their treatment.", "Have the patient sign an Against Medical Advice (AMA) form.", "Obtain a specimen for blood type cross and match.", "Document the statement in the patient's medical record."], "answer": "Document the statement in the patient's medical record.", "category": "General Medical Assisting"}, {"num": 175, "question": "A medical assistant is preparing to administer a liquid oral medication to a patient. Which of the following methods should the assistant use to ensure administration of the correct dose?", "options": ["Add slightly more than the prescribed dose to account for the medication adhering to the sides of the cup.", "Pour the medication into the container's lid for easy administration.", "Pour the medication to the prescribed dose in the medicine cup on a flat surface.", "Measure the dose at the top of the meniscus in the medicine cup."], "answer": "Pour the medication to the prescribed dose in the medicine cup on a flat surface.", "category": "Pharmacology & Medications"}, {"num": 176, "question": "When performing the palpatory method for obtaining blood pressure, which of the following indicates the level at which a medical assistant should inflate the cuff?", "options": ["30 mm Hg above the reappearance of the brachial pulse", "30 mm Hg above the radial pulse cessation", "30 mm Hg above the reappearance of the radial pulse", "30 mm Hg above the brachial pulse cessation"], "answer": "30 mm Hg above the radial pulse cessation", "category": "Vital Signs & Measurements"}, {"num": 177, "question": "Which of the following therapeutic communication techniques is a clinical medical assistant using when providing feedback and using the phrase, \"You feel that\u2026\"?", "options": ["Summarizing", "Paraphrasing", "Reflection", "Clarification"], "answer": "Reflection", "category": "Communication & Ethics"}, {"num": 178, "question": "Which of the following preventative screenings are matched correctly with the age at which they should be initially completed?", "options": ["Colonoscopy, 45 years old", "Mammography, 50 years old", "PSA test, 50 years old", "Papanicolaou (Pap) test,18 years old"], "answer": "Colonoscopy, 45 years old", "category": "Diagnostic Testing & Screening"}, {"num": 179, "question": "When completing documentation in a patient's paper medical record, a medical assistant realizes they made an error. Which of the following actions should the assistant take?", "options": ["Leave the error in the medical record.", "Use correction fluid to correct the entry.", "Draw a line through the error and initial it.", "Erase the entry in the medical record."], "answer": "Draw a line through the error and initial it.", "category": "Medical Records & Documentation"}, {"num": 180, "question": "If an EKG tracing has an upward and downward movement of the waveform, which of the following types of artifacts is indicated?", "options": ["Interrupted baseline", "AC interference", "Somatic tremor", "Wandering baseline"], "answer": "Wandering baseline", "category": "EKG & Cardiac Procedures"}];
+const PER_SEC = 30, NUM_SEC = 6;
+
+// ---- STATE ----
+let S = {
+  mode:'study', sec:0,
+  ans: Array(180).fill(''),
+  chk: Array(180).fill(false),
+  flag: Array(180).fill(false),
+  notes: Array(180).fill(''),
+  conf: Array(180).fill(''),
+  t0: null, elapsed: 0
+};
+let timerInterval = null;
+
+// ---- PERSISTENCE ----
+function save(){
+  if(!el('opt-autosave')?.checked) return;
+  try{ localStorage.setItem('ccma2026',JSON.stringify(S)) }catch(e){}
+}
+function load(){
+  try{
+    const d=localStorage.getItem('ccma2026');
+    if(d){const p=JSON.parse(d); Object.assign(S,p)}
+  }catch(e){}
+}
+function el(id){return document.getElementById(id)}
+
+// ---- SECTIONS ----
+function secGrid(){
+  const g=el('sec-grid'); if(!g) return; g.innerHTML='';
+  for(let i=0;i<NUM_SEC;i++){
+    const s=i*PER_SEC, e=(i+1)*PER_SEC;
+    const ans=S.ans.slice(s,e).filter(a=>a!=='').length;
+    const b=document.createElement('div');
+    b.className='section-btn'+(i===S.sec?' active':'')+(ans===PER_SEC?' completed':'');
+    b.innerHTML=`<div class="section-title">Section ${i+1}</div><div class="section-range">Q${s+1}–${e}</div><div class="section-progress">${ans}/${PER_SEC}</div>`;
+    b.onclick=()=>{S.sec=i;save();render()};
+    g.appendChild(b);
+  }
+}
+
+// ---- RENDER QUIZ ----
+function render(){
+  secGrid(); renderCards(); secNav();
+}
+
+function renderCards(){
+  const c=el('quiz-cards'); if(!c) return; c.innerHTML='';
+  const filt=el('f-status')?.value||'all';
+  const fcat=el('f-cat')?.value||'all';
+  const start=S.sec*PER_SEC, end=(S.sec+1)*PER_SEC;
+  let shown=0;
+  
+  for(let idx=start;idx<end;idx++){
+    const q=Q[idx];
+    const isAns=S.ans[idx]!=='', isFlg=S.flag[idx];
+    const isCor=S.chk[idx]&&S.ans[idx]===q.answer;
+    const isInc=S.chk[idx]&&S.ans[idx]!==q.answer;
+    
+    if(filt==='unanswered'&&isAns) continue;
+    if(filt==='answered'&&!isAns) continue;
+    if(filt==='flagged'&&!isFlg) continue;
+    if(filt==='correct'&&!isCor) continue;
+    if(filt==='incorrect'&&!isInc) continue;
+    if(fcat!=='all'&&q.category!==fcat) continue;
+    
+    c.appendChild(makeCard(q,idx));
+    shown++;
+  }
+  if(shown===0) c.innerHTML='<div style="text-align:center;padding:40px;color:var(--text-muted)">No questions match this filter in the current section.</div>';
+}
+
+function makeCard(q,idx){
+  const d=document.createElement('div');
+  d.className='question-card';
+  const isAns=S.ans[idx]!=='';
+  const isCor=S.chk[idx]&&S.ans[idx]===q.answer;
+  const isInc=S.chk[idx]&&S.ans[idx]!==q.answer;
+  const study=S.mode==='study';
+  const showStudyFb=study&&isAns;
+  
+  if(isCor||(showStudyFb&&S.ans[idx]===q.answer)) d.classList.add('correct');
+  if(isInc||(showStudyFb&&S.ans[idx]!==q.answer)) d.classList.add('incorrect');
+  if(S.flag[idx]) d.classList.add('flagged');
+  
+  const showCat=el('opt-categories')?.checked!==false;
+  const showConf=el('opt-confidence')?.checked!==false;
+  const showNotes=el('opt-notes')?.checked===true;
+  
+  let h=`<div class="question-header"><span class="question-number">Question ${q.num}</span>
+    <button class="icon-btn${S.flag[idx]?' active':''}" data-act="flag" data-i="${idx}" title="Flag for review">${S.flag[idx]?'🚩':'⚐'}</button></div>`;
+  if(showCat) h+=`<div class="category-tag">${q.category}</div>`;
+  h+=`<div class="question-text">${q.question}</div>`;
+  
+  // Build select with escaped options
+  h+=`<select class="answer-select${isCor?' correct':''}${isInc?' incorrect':''}" data-act="answer" data-i="${idx}"${S.chk[idx]&&!study?' disabled':''}>`;
+  h+=`<option value="">— Select an answer —</option>`;
+  for(const opt of q.options){
+    h+=`<option value="${opt}"${S.ans[idx]===opt?' selected':''}>${opt}</option>`;
+  }
+  h+=`</select>`;
+  
+  // Confidence
+  if(showConf&&isAns){
+    h+=`<div class="confidence-btns">
+      <button class="confidence-btn${S.conf[idx]==='low'?' selected':''}" data-act="conf" data-i="${idx}" data-lv="low">😰 Unsure</button>
+      <button class="confidence-btn${S.conf[idx]==='medium'?' selected':''}" data-act="conf" data-i="${idx}" data-lv="medium">🤔 Maybe</button>
+      <button class="confidence-btn${S.conf[idx]==='high'?' selected':''}" data-act="conf" data-i="${idx}" data-lv="high">😊 Sure</button>
+    </div>`;
+  }
+  
+  // Feedback
+  if(S.chk[idx]||showStudyFb){
+    const correct=S.ans[idx]===q.answer;
+    h+=`<div class="feedback ${correct?'correct':'incorrect'}"><strong>${correct?'✓ Correct!':'✗ Incorrect'}</strong>${!correct?` — Correct answer: ${q.answer}`:''}</div>`;
+  }
+  
+  // Notes
+  const hasNote=S.notes[idx]!=='';
+  h+=`<button class="notes-toggle" data-act="togglenote" data-i="${idx}">${hasNote?'📝 Edit note':'📝 Add note'}</button>`;
+  h+=`<div class="notes-area${showNotes||hasNote?'':' hidden'}" id="note-${idx}"><textarea data-act="note" data-i="${idx}" placeholder="Type your notes here…">${S.notes[idx]}</textarea></div>`;
+  
+  d.innerHTML=h;
+  return d;
+}
+
+// ---- SECTION NAV ----
+function secNav(){
+  const info=el('sec-info');
+  const start=S.sec*PER_SEC+1, end=(S.sec+1)*PER_SEC;
+  const ans=S.ans.slice(S.sec*PER_SEC,(S.sec+1)*PER_SEC).filter(a=>a!=='').length;
+  if(info) info.textContent=`Section ${S.sec+1} of ${NUM_SEC} · ${ans}/${PER_SEC} answered`;
+  el('btn-prev').disabled=S.sec===0;
+  const isLast=S.sec===NUM_SEC-1;
+  el('btn-next').textContent=isLast?'🎉 Finish Quiz':'Next →';
+}
+
+// ---- DASHBOARD ----
+function updateDash(){
+  const ans=S.ans.filter(a=>a!=='').length;
+  const checked=S.chk.filter(c=>c).length;
+  const cor=S.ans.filter((a,i)=>S.chk[i]&&a===Q[i].answer).length;
+  const inc=S.ans.filter((a,i)=>S.chk[i]&&a!==Q[i].answer).length;
+  const flg=S.flag.filter(f=>f).length;
+  const acc=checked>0?Math.round(cor/checked*100):0;
+  
+  const ds=el('dash-stats');
+  if(ds) ds.innerHTML=`
+    <div class="stat-card"><span class="stat-value">${ans}/180</span><div class="stat-label">Answered</div></div>
+    <div class="stat-card success"><span class="stat-value">${cor}</span><div class="stat-label">Correct</div></div>
+    <div class="stat-card error"><span class="stat-value">${inc}</span><div class="stat-label">Incorrect</div></div>
+    <div class="stat-card warning"><span class="stat-value">${flg}</span><div class="stat-label">Flagged</div></div>
+    <div class="stat-card purple"><span class="stat-value">${acc}%</span><div class="stat-label">Accuracy</div></div>`;
+  
+  // Categories
+  const cats={};
+  Q.forEach((q,i)=>{
+    if(!cats[q.category]) cats[q.category]={t:0,a:0,c:0,chked:0};
+    cats[q.category].t++;
+    if(S.ans[i]!==''){
+      cats[q.category].a++;
+      if(S.chk[i]){
+        cats[q.category].chked++;
+        if(S.ans[i]===q.answer) cats[q.category].c++;
+      }
+    }
+  });
+  const cb=el('cat-breakdown');
+  if(cb){cb.innerHTML='';
+    Object.entries(cats).sort((a,b)=>b[1].t-a[1].t).forEach(([cat,s])=>{
+      const pct=s.chked>0?Math.round(s.c/s.chked*100):0;
+      const barColor=pct>=80?'var(--success)':pct>=50?'var(--warning)':'var(--error)';
+      cb.innerHTML+=`<div class="cat-item"><div class="cat-header"><span class="cat-name">${cat} <span style="font-weight:400;color:var(--text-muted);font-size:12px">(${s.t} questions)</span></span><span class="cat-score">${s.c}/${s.chked} correct${s.chked>0?' · '+pct+'%':''}</span></div><div class="cat-bar-bg"><div class="cat-bar" style="width:${pct}%;background:${barColor}"></div></div></div>`;
+    });
+  }
+  
+  // Analytics
+  const an=el('analytics');
+  if(an){
+    const fmt=s=>{const m=Math.floor(s/60),ss=s%60;return`${m}:${ss.toString().padStart(2,'0')}`};
+    const lc=S.conf.filter(c=>c==='low').length, mc=S.conf.filter(c=>c==='medium').length, hc=S.conf.filter(c=>c==='high').length;
+    an.innerHTML=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div><p><strong>Time Studied:</strong> ${fmt(S.elapsed)}</p><p><strong>Questions Flagged:</strong> ${flg}</p><p><strong>Notes Added:</strong> ${S.notes.filter(n=>n!=='').length}</p></div>
+      <div><p><strong>😰 Low Confidence:</strong> ${lc}</p><p><strong>🤔 Medium:</strong> ${mc}</p><p><strong>😊 High:</strong> ${hc}</p></div>
+    </div>`;
+  }
+  
+  // Badges
+  const badges=[
+    {n:'First Step',i:'🎯',e:()=>S.ans.some(a=>a!=='')},
+    {n:'Section Pro',i:'📚',e:()=>{for(let i=0;i<NUM_SEC;i++){if(S.ans.slice(i*PER_SEC,(i+1)*PER_SEC).every(a=>a!==''))return true}return false}},
+    {n:'Halfway',i:'🌟',e:()=>S.ans.filter(a=>a!=='').length>=90},
+    {n:'Complete',i:'💯',e:()=>S.ans.filter(a=>a!=='').length===180},
+    {n:'Perfect 30',i:'🏆',e:()=>{for(let i=0;i<NUM_SEC;i++){const s=i*PER_SEC;const sec=S.ans.slice(s,s+PER_SEC);if(sec.every(a=>a!=='')&&sec.every((a,j)=>S.chk[s+j]&&a===Q[s+j].answer))return true}return false}},
+    {n:'Ace (90%+)',i:'🎓',e:()=>{const a=S.ans.filter((_,i)=>S.chk[i]).length,c=S.ans.filter((a,i)=>S.chk[i]&&a===Q[i].answer).length;return a>=50&&c/a>=.9}},
+    {n:'Note Taker',i:'📝',e:()=>S.notes.filter(n=>n!=='').length>=20},
+    {n:'Organized',i:'🚩',e:()=>S.flag.filter(f=>f).length>=10}
+  ];
+  const bg=el('badges');
+  if(bg){bg.innerHTML='';badges.forEach(b=>{
+    const earned=b.e();
+    bg.innerHTML+=`<div class="badge${earned?' earned':''}"><div class="badge-icon">${b.i}</div><div class="badge-name">${b.n}</div></div>`;
+  })}
+}
+
+// ---- REVIEW ----
+function doReview(){
+  const mode=el('review-mode')?.value;
+  const c=el('review-cards'); if(!c) return; c.innerHTML='';
+  let list=[];
+  if(mode==='incorrect') list=Q.map((q,i)=>({q,i})).filter(({q,i})=>S.chk[i]&&S.ans[i]!==q.answer);
+  else if(mode==='flagged') list=Q.map((q,i)=>({q,i})).filter(({i})=>S.flag[i]);
+  else if(mode==='low-confidence') list=Q.map((q,i)=>({q,i})).filter(({i})=>S.conf[i]==='low');
+  if(!list.length){c.innerHTML='<div style="text-align:center;padding:40px;color:var(--text-muted)">No questions match this review mode. Keep studying!</div>';return}
+  list.forEach(({q,i})=>c.appendChild(makeCard(q,i)));
+}
+
+// ---- POPULATE CATEGORY FILTER ----
+function populateCats(){
+  const sel=el('f-cat'); if(!sel) return;
+  [...new Set(Q.map(q=>q.category))].sort().forEach(c=>{
+    const o=document.createElement('option');o.value=c;o.textContent=c;sel.appendChild(o);
+  });
+}
+
+// ---- TIMER ----
+function startTimer(){
+  if(!S.t0) S.t0=Date.now()-S.elapsed*1000;
+  el('timer')?.classList.remove('hidden');
+  if(timerInterval) clearInterval(timerInterval);
+  timerInterval=setInterval(()=>{
+    S.elapsed=Math.floor((Date.now()-S.t0)/1000);
+    const tv=el('timer-val');
+    if(tv){const m=Math.floor(S.elapsed/60),s=S.elapsed%60;tv.textContent=m+':'+s.toString().padStart(2,'0')}
+  },1000);
+}
+function stopTimer(){
+  if(timerInterval){clearInterval(timerInterval);timerInterval=null}
+  el('timer')?.classList.add('hidden');
+}
+
+// ---- EXPORT / IMPORT ----
+function exportProgress(){
+  const blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='ccma-quiz-progress-'+new Date().toISOString().slice(0,10)+'.json';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+}
+function importProgress(){
+  const inp=document.createElement('input');inp.type='file';inp.accept='.json';
+  inp.onchange=e=>{
+    const f=e.target.files[0]; if(!f) return;
+    const r=new FileReader();
+    r.onload=ev=>{
+      try{const d=JSON.parse(ev.target.result);Object.assign(S,d);save();location.reload()}
+      catch(err){alert('Invalid file. Please select a valid export file.')}
+    };
+    r.readAsText(f);
+  };
+  inp.click();
+}
+
+// ---- PRINT ----
+function printResults(){
+  const cor=S.ans.filter((a,i)=>S.chk[i]&&a===Q[i].answer).length;
+  const inc=S.ans.filter((a,i)=>S.chk[i]&&a!==Q[i].answer).length;
+  const checked=S.chk.filter(c=>c).length;
+  const acc=checked>0?Math.round(cor/checked*100):0;
+
+  // Build print overlay
+  let existing=document.getElementById('print-overlay');
+  if(existing) existing.remove();
+
+  const overlay=document.createElement('div');
+  overlay.id='print-overlay';
+  overlay.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;background:#fff;z-index:9999;overflow-y:auto;padding:32px;color:#111;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;line-height:1.6';
+
+  let h=`<div style="max-width:800px;margin:0 auto">`;
+  h+=`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px" class="no-print">
+    <button onclick="document.getElementById('print-overlay').remove()" style="padding:10px 20px;border:2px solid #e2e8f0;border-radius:8px;background:#fff;font-size:14px;font-weight:600;cursor:pointer">← Back to Quiz</button>
+    <button onclick="window.print()" style="padding:10px 20px;border:none;border-radius:8px;background:#2563eb;color:#fff;font-size:14px;font-weight:600;cursor:pointer">🖨️ Print / Save PDF</button>
+  </div>`;
+
+  h+=`<h1 style="font-size:22px;margin-bottom:4px">🏥 CCMA Mock Exam 2026 — Results Report</h1>`;
+  h+=`<div style="color:#666;font-size:14px;margin-bottom:24px">Generated ${new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'})} at ${new Date().toLocaleTimeString()}</div>`;
+
+  h+=`<div style="display:flex;gap:24px;margin-bottom:32px;padding:20px;background:#f8fafc;border-radius:12px;border:1px solid #e2e8f0">
+    <div style="text-align:center;flex:1"><span style="font-size:28px;font-weight:800;display:block;color:#2563eb">${S.ans.filter(a=>a!=='').length}/180</span><span style="font-size:12px;color:#64748b">ANSWERED</span></div>
+    <div style="text-align:center;flex:1"><span style="font-size:28px;font-weight:800;display:block;color:#059669">${cor}</span><span style="font-size:12px;color:#64748b">CORRECT</span></div>
+    <div style="text-align:center;flex:1"><span style="font-size:28px;font-weight:800;display:block;color:#dc2626">${inc}</span><span style="font-size:12px;color:#64748b">INCORRECT</span></div>
+    <div style="text-align:center;flex:1"><span style="font-size:28px;font-weight:800;display:block;color:#7c3aed">${acc}%</span><span style="font-size:12px;color:#64748b">ACCURACY</span></div>
+  </div>`;
+
+  // Category summary
+  const cats={};
+  Q.forEach((q,i)=>{
+    if(!cats[q.category]) cats[q.category]={t:0,c:0,chk:0};
+    cats[q.category].t++;
+    if(S.chk[i]){cats[q.category].chk++;if(S.ans[i]===q.answer)cats[q.category].c++}
+  });
+  h+=`<h3 style="margin-bottom:12px">📊 Performance by Category</h3>`;
+  Object.entries(cats).sort((a,b)=>b[1].t-a[1].t).forEach(([cat,s])=>{
+    const pct=s.chk>0?Math.round(s.c/s.chk*100):0;
+    h+=`<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f1f5f9;font-size:13px"><span>${cat} (${s.t})</span><span><strong>${s.c}/${s.chk}</strong> correct${s.chk>0?' · '+pct+'%':''}</span></div>`;
+  });
+
+  // All questions
+  h+=`<h3 style="margin-top:32px;margin-bottom:16px">📝 All Questions</h3>`;
+  Q.forEach((q,i)=>{
+    const answered=S.ans[i]!=='';
+    const isCorrect=S.chk[i]&&S.ans[i]===q.answer;
+    const isIncorrect=S.chk[i]&&S.ans[i]!==q.answer;
+    const bg=isCorrect?'#f0fdf4':isIncorrect?'#fef2f2':'#f8fafc';
+    const bdr=isCorrect?'4px solid #059669':isIncorrect?'4px solid #dc2626':'4px solid #94a3b8';
+
+    h+=`<div style="padding:14px;margin-bottom:10px;border:1px solid #e2e8f0;border-left:${bdr};border-radius:8px;background:${bg};page-break-inside:avoid">`;
+    h+=`<div style="font-size:11px;font-weight:700;color:#2563eb;margin-bottom:2px">Question ${q.num}</div>`;
+    h+=`<div style="font-size:10px;color:#7c3aed;font-weight:600;margin-bottom:6px">${q.category}</div>`;
+    h+=`<div style="font-size:14px;font-weight:500;margin-bottom:8px">${q.question}</div>`;
+
+    if(!answered){
+      h+=`<div style="font-size:13px;color:#94a3b8">Not answered</div>`;
+    }else if(isCorrect){
+      h+=`<div style="font-size:13px"><strong style="color:#059669">✓ Your answer: ${S.ans[i]}</strong></div>`;
+    }else{
+      h+=`<div style="font-size:13px"><strong style="color:#dc2626">✗ Your answer: ${S.ans[i]}</strong><br><strong style="color:#059669">Correct answer: ${q.answer}</strong></div>`;
+    }
+    if(S.notes[i]) h+=`<div style="font-size:12px;color:#64748b;margin-top:6px;padding-top:6px;border-top:1px solid #e2e8f0;font-style:italic">📝 ${S.notes[i]}</div>`;
+    h+=`</div>`;
+  });
+
+  h+=`<div style="margin-top:32px;text-align:center;font-size:12px;color:#94a3b8">CCMA Mock Exam 2026 Study Platform</div>`;
+  h+=`</div>`;
+
+  overlay.innerHTML=h;
+  document.body.appendChild(overlay);
+}
+
+// ---- EVENT DELEGATION ----
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-act]');
+  if(!t) return;
+  const act=t.dataset.act, idx=parseInt(t.dataset.i);
+  
+  if(act==='flag'){S.flag[idx]=!S.flag[idx];save();render();updateDash()}
+  if(act==='conf'){S.conf[idx]=t.dataset.lv;save();render()}
+  if(act==='togglenote'){
+    const area=el('note-'+idx);
+    if(area) area.classList.toggle('hidden');
+  }
+});
+document.addEventListener('change',e=>{
+  const t=e.target.closest('[data-act]');
+  if(!t) return;
+  const act=t.dataset.act, idx=parseInt(t.dataset.i);
+  
+  if(act==='answer'){S.ans[idx]=t.value;if(S.mode==='study'&&t.value!=='')S.chk[idx]=true;save();render();updateDash()}
+  if(act==='note'){S.notes[idx]=t.value;save()}
+});
+
+// ---- INIT ----
+document.addEventListener('DOMContentLoaded',()=>{
+  load();
+  populateCats();
+  render();
+  updateDash();
+  
+  // Restore settings
+  if(S.mode==='exam'){el('mode-study')?.classList.remove('active');el('mode-exam')?.classList.add('active')}
+  
+  // Load theme
+  const theme=localStorage.getItem('ccma-theme')||'light';
+  if(theme==='dark'){document.documentElement.setAttribute('data-theme','dark');el('theme-btn').textContent='☀️'}
+  
+  // Tabs
+  el('tabs')?.addEventListener('click',e=>{
+    const tab=e.target.closest('.tab');if(!tab) return;
+    const name=tab.dataset.tab;
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    ['quiz','dashboard','review','settings'].forEach(t=>{
+      const tc=el('tc-'+t);if(tc) tc.style.display=t===name?'block':'none';
+    });
+    if(name==='dashboard') updateDash();
+  });
+  // Init tab display
+  ['dashboard','review','settings'].forEach(t=>{const tc=el('tc-'+t);if(tc) tc.style.display='none'});
+  
+  // Mode toggle
+  el('mode-study')?.addEventListener('click',()=>{S.mode='study';el('mode-study').classList.add('active');el('mode-exam').classList.remove('active');save();render()});
+  el('mode-exam')?.addEventListener('click',()=>{S.mode='exam';el('mode-exam').classList.add('active');el('mode-study').classList.remove('active');save();render()});
+  
+  // Theme
+  el('theme-btn')?.addEventListener('click',()=>{
+    const isDark=document.documentElement.getAttribute('data-theme')==='dark';
+    document.documentElement.setAttribute('data-theme',isDark?'light':'dark');
+    localStorage.setItem('ccma-theme',isDark?'light':'dark');
+    el('theme-btn').textContent=isDark?'🌙':'☀️';
+  });
+  
+  // Filters
+  el('f-status')?.addEventListener('change',renderCards);
+  el('f-cat')?.addEventListener('change',renderCards);
+  
+  // Section nav
+  el('btn-prev')?.addEventListener('click',()=>{if(S.sec>0){S.sec--;save();render();window.scrollTo({top:0,behavior:'smooth'})}});
+  el('btn-next')?.addEventListener('click',()=>{
+    if(S.sec<NUM_SEC-1){S.sec++;save();render();window.scrollTo({top:0,behavior:'smooth'})}
+    else{
+      // Finish quiz — check all and show dashboard
+      S.chk=S.chk.map(()=>true);save();render();updateDash();
+      document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+      document.querySelector('[data-tab="dashboard"]')?.classList.add('active');
+      ['quiz','review','settings'].forEach(t=>{const tc=el('tc-'+t);if(tc) tc.style.display='none'});
+      el('tc-dashboard').style.display='block';
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+  });
+  
+  // Check section
+  el('btn-check')?.addEventListener('click',()=>{
+    const start=S.sec*PER_SEC, end=(S.sec+1)*PER_SEC;
+    const unanswered=S.ans.slice(start,end).filter(a=>a==='').length;
+    if(unanswered>0&&!confirm(unanswered+' questions unanswered in this section. Check anyway?')) return;
+    for(let i=start;i<end;i++) S.chk[i]=true;
+    save();render();updateDash();
+  });
+  
+  // Reset
+  el('btn-reset')?.addEventListener('click',()=>{
+    if(!confirm('Reset ALL progress? This cannot be undone.')) return;
+    S={mode:S.mode,sec:0,ans:Array(180).fill(''),chk:Array(180).fill(false),flag:Array(180).fill(false),notes:Array(180).fill(''),conf:Array(180).fill(''),t0:null,elapsed:0};
+    save();location.reload();
+  });
+  
+  // Review
+  el('btn-review')?.addEventListener('click',doReview);
+  
+  // Settings buttons
+  el('btn-export')?.addEventListener('click',exportProgress);
+  el('btn-import')?.addEventListener('click',importProgress);
+  el('btn-print')?.addEventListener('click',printResults);
+  el('btn-clear')?.addEventListener('click',()=>{
+    if(!confirm('Delete ALL saved data? This cannot be undone.')) return;
+    localStorage.removeItem('ccma2026');localStorage.removeItem('ccma-theme');location.reload();
+  });
+  
+  // Settings toggles
+  ['opt-confidence','opt-categories','opt-notes'].forEach(id=>{
+    el(id)?.addEventListener('change',render);
+  });
+  el('opt-timer')?.addEventListener('change',e=>{
+    if(e.target.checked) startTimer(); else stopTimer();
+  });
+  
+  // Auto-save every 30s
+  setInterval(save,30000);
+  
+  console.log('CCMA Mock Exam 2026 loaded: '+Q.length+' questions');
+});
+</script>
+</body>
+</html>
