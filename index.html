@@ -208,6 +208,7 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-he
   </div>
 
   <div class="timer-display no-print hidden" id="timer">⏱️ <span id="timer-val">00:00</span></div>
+  <div class="no-print hidden" id="shuffle-badge" style="text-align:center;padding:4px 0;font-size:13px;color:var(--primary);font-weight:600">🔀 Questions shuffled</div>
 
   <!-- QUIZ -->
   <div class="tab-content active" id="tc-quiz">
@@ -278,6 +279,9 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-he
         <label style="display:flex;align-items:center;gap:8px;margin-bottom:16px;font-size:14px;cursor:pointer">
           <input type="checkbox" id="opt-notes"> Show notes by default
         </label>
+        <label style="display:flex;align-items:center;gap:8px;margin-bottom:16px;font-size:14px;cursor:pointer">
+          <input type="checkbox" id="opt-shuffle"> Shuffle questions
+        </label>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
         <button class="btn btn-secondary" id="btn-export">📥 Export Progress</button>
@@ -301,7 +305,8 @@ _ALL_Q[33].answer = _ALL_Q[33].options[0];
 
 // Mock-exam mode — driven by ?mock=1 or ?mock=2 URL param
 const _mock = new URLSearchParams(location.search).get('mock');
-const Q      = _mock === '1' ? _ALL_Q.slice(0, 90) : _mock === '2' ? _ALL_Q.slice(90) : _ALL_Q;
+let Q        = _mock === '1' ? _ALL_Q.slice(0, 90) : _mock === '2' ? _ALL_Q.slice(90) : _ALL_Q;
+const BASE_Q = Q.slice();
 const NUM_SEC = Q.length <= 90 ? 3 : 6;
 const TOTAL   = Q.length;
 const MOCK_KEY = 'ccma2026' + (_mock ? '-mock' + _mock : '');
@@ -313,6 +318,8 @@ const PER_SEC = 30;
 // ---- STATE ----
 let S = {
   mode:'study', sec:0,
+  shuffled: false,
+  shuffleOrder: [],
   ans_study: Array(TOTAL).fill(''),
   chk_study: Array(TOTAL).fill(false),
   ans_exam:  Array(TOTAL).fill(''),
@@ -328,6 +335,13 @@ let timerInterval = null;
 function syncAliases(){
   S.ans = S.mode==='study' ? S.ans_study : S.ans_exam;
   S.chk = S.mode==='study' ? S.chk_study : S.chk_exam;
+}
+function applyShuffleOrder(){
+  if(S.shuffled && S.shuffleOrder.length===BASE_Q.length){
+    Q = S.shuffleOrder.map(i => BASE_Q[i]);
+  } else {
+    Q = BASE_Q.slice();
+  }
 }
 
 // ---- PERSISTENCE ----
@@ -347,6 +361,7 @@ function load(){
     }
   }catch(e){}
   syncAliases();
+  applyShuffleOrder();
 }
 function el(id){return document.getElementById(id)}
 
@@ -796,7 +811,26 @@ document.addEventListener('DOMContentLoaded',()=>{
   el('opt-timer')?.addEventListener('change',e=>{
     if(e.target.checked) startTimer(); else stopTimer();
   });
-  
+  el('opt-shuffle')?.addEventListener('change',e=>{
+    if(e.target.checked){
+      if(!confirm('Shuffle questions? Your current answers will be cleared.')){e.target.checked=false;return;}
+      const order=BASE_Q.map((_,i)=>i);
+      for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}
+      S.shuffled=true; S.shuffleOrder=order;
+    } else {
+      if(!confirm('Restore original order? Your current answers will be cleared.')){e.target.checked=true;return;}
+      S.shuffled=false; S.shuffleOrder=[];
+    }
+    S.ans_study=Array(TOTAL).fill(''); S.chk_study=Array(TOTAL).fill(false);
+    S.ans_exam=Array(TOTAL).fill('');  S.chk_exam=Array(TOTAL).fill(false);
+    S.flag=Array(TOTAL).fill(false); S.notes=Array(TOTAL).fill(''); S.conf=Array(TOTAL).fill('');
+    S.sec=0; syncAliases(); save(); location.reload();
+  });
+
+  // Reflect shuffle state in UI on load
+  if(el('opt-shuffle')) el('opt-shuffle').checked=S.shuffled;
+  if(S.shuffled&&el('shuffle-badge')) el('shuffle-badge').classList.remove('hidden');
+
   // Auto-save every 30s
   setInterval(save,30000);
   
