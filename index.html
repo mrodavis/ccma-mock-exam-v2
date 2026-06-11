@@ -313,25 +313,40 @@ const PER_SEC = 30;
 // ---- STATE ----
 let S = {
   mode:'study', sec:0,
-  ans: Array(TOTAL).fill(''),
-  chk: Array(TOTAL).fill(false),
-  flag: Array(TOTAL).fill(false),
+  ans_study: Array(TOTAL).fill(''),
+  chk_study: Array(TOTAL).fill(false),
+  ans_exam:  Array(TOTAL).fill(''),
+  chk_exam:  Array(TOTAL).fill(false),
+  flag:  Array(TOTAL).fill(false),
   notes: Array(TOTAL).fill(''),
-  conf: Array(TOTAL).fill(''),
+  conf:  Array(TOTAL).fill(''),
   t0: null, elapsed: 0
 };
+S.ans = S.ans_study;
+S.chk = S.chk_study;
 let timerInterval = null;
+function syncAliases(){
+  S.ans = S.mode==='study' ? S.ans_study : S.ans_exam;
+  S.chk = S.mode==='study' ? S.chk_study : S.chk_exam;
+}
 
 // ---- PERSISTENCE ----
 function save(){
   if(!el('opt-autosave')?.checked) return;
-  try{ localStorage.setItem(MOCK_KEY,JSON.stringify(S)) }catch(e){}
+  try{ const {ans,chk,...toSave}=S; localStorage.setItem(MOCK_KEY,JSON.stringify(toSave)) }catch(e){}
 }
 function load(){
   try{
     const d=localStorage.getItem(MOCK_KEY);
-    if(d){const p=JSON.parse(d); Object.assign(S,p)}
+    if(d){
+      const p=JSON.parse(d); Object.assign(S,p);
+      if(!p.ans_study && p.ans){
+        S.ans_study=p.ans.slice(); S.chk_study=p.chk?p.chk.slice():Array(TOTAL).fill(false);
+        S.ans_exam=Array(TOTAL).fill(''); S.chk_exam=Array(TOTAL).fill(false);
+      }
+    }
   }catch(e){}
+  syncAliases();
 }
 function el(id){return document.getElementById(id)}
 
@@ -564,7 +579,7 @@ function importProgress(){
     const f=e.target.files[0]; if(!f) return;
     const r=new FileReader();
     r.onload=ev=>{
-      try{const d=JSON.parse(ev.target.result);Object.assign(S,d);save();location.reload()}
+      try{const d=JSON.parse(ev.target.result);Object.assign(S,d);syncAliases();save();location.reload()}
       catch(err){alert('Invalid file. Please select a valid export file.')}
     };
     r.readAsText(f);
@@ -713,8 +728,8 @@ document.addEventListener('DOMContentLoaded',()=>{
   ['dashboard','review','settings'].forEach(t=>{const tc=el('tc-'+t);if(tc) tc.style.display='none'});
   
   // Mode toggle
-  el('mode-study')?.addEventListener('click',()=>{S.mode='study';el('mode-study').classList.add('active');el('mode-exam').classList.remove('active');save();render()});
-  el('mode-exam')?.addEventListener('click',()=>{S.mode='exam';el('mode-exam').classList.add('active');el('mode-study').classList.remove('active');save();render()});
+  el('mode-study')?.addEventListener('click',()=>{S.mode='study';syncAliases();el('mode-study').classList.add('active');el('mode-exam').classList.remove('active');save();render()});
+  el('mode-exam')?.addEventListener('click',()=>{S.mode='exam';syncAliases();el('mode-exam').classList.add('active');el('mode-study').classList.remove('active');save();render()});
   
   // Theme
   el('theme-btn')?.addEventListener('click',()=>{
@@ -734,7 +749,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     if(S.sec<NUM_SEC-1){S.sec++;save();render();window.scrollTo({top:0,behavior:'smooth'})}
     else{
       // Finish quiz — check all and show dashboard
-      S.chk=S.chk.map(()=>true);save();render();updateDash();
+      S.chk.fill(true);save();render();updateDash();
       document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
       document.querySelector('[data-tab="dashboard"]')?.classList.add('active');
       ['quiz','review','settings'].forEach(t=>{const tc=el('tc-'+t);if(tc) tc.style.display='none'});
@@ -755,8 +770,11 @@ document.addEventListener('DOMContentLoaded',()=>{
   // Reset
   el('btn-reset')?.addEventListener('click',()=>{
     if(!confirm('Reset ALL progress? This cannot be undone.')) return;
-    S={mode:S.mode,sec:0,ans:Array(TOTAL).fill(''),chk:Array(TOTAL).fill(false),flag:Array(TOTAL).fill(false),notes:Array(TOTAL).fill(''),conf:Array(TOTAL).fill(''),t0:null,elapsed:0};
-    save();location.reload();
+    S.ans_study=Array(TOTAL).fill(''); S.chk_study=Array(TOTAL).fill(false);
+    S.ans_exam=Array(TOTAL).fill('');  S.chk_exam=Array(TOTAL).fill(false);
+    S.flag=Array(TOTAL).fill(false); S.notes=Array(TOTAL).fill(''); S.conf=Array(TOTAL).fill('');
+    S.sec=0; S.t0=null; S.elapsed=0;
+    syncAliases(); save(); location.reload();
   });
   
   // Review
