@@ -225,6 +225,7 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-he
       </select>
       <select id="f-cat"><option value="all">All Categories</option></select>
       <span class="spacer"></span>
+      <button class="btn btn-secondary" id="btn-shuffle-quick">🔀 Shuffle</button>
       <button class="btn btn-success" id="btn-check">✓ Check Section</button>
       <button class="btn btn-secondary" id="btn-reset">↻ Reset</button>
     </div>
@@ -811,24 +812,29 @@ document.addEventListener('DOMContentLoaded',()=>{
   el('opt-timer')?.addEventListener('change',e=>{
     if(e.target.checked) startTimer(); else stopTimer();
   });
-  el('opt-shuffle')?.addEventListener('change',e=>{
-    if(e.target.checked){
-      if(!confirm('Shuffle questions? Your current answers will be cleared.')){e.target.checked=false;return;}
+  // Shuffle logic — shared by the quick button and settings checkbox
+  function doShuffle(enable){
+    if(enable){
+      if(!confirm('Shuffle questions? Your current answers will be cleared.')) return false;
       const order=BASE_Q.map((_,i)=>i);
       for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}
       S.shuffled=true; S.shuffleOrder=order;
     } else {
-      if(!confirm('Restore original order? Your current answers will be cleared.')){e.target.checked=true;return;}
+      if(!confirm('Restore original order? Your current answers will be cleared.')) return false;
       S.shuffled=false; S.shuffleOrder=[];
     }
     S.ans_study=Array(TOTAL).fill(''); S.chk_study=Array(TOTAL).fill(false);
     S.ans_exam=Array(TOTAL).fill('');  S.chk_exam=Array(TOTAL).fill(false);
     S.flag=Array(TOTAL).fill(false); S.notes=Array(TOTAL).fill(''); S.conf=Array(TOTAL).fill('');
     S.sec=0; syncAliases(); save(); location.reload();
-  });
+    return true;
+  }
+  el('btn-shuffle-quick')?.addEventListener('click',()=>doShuffle(!S.shuffled));
+  el('opt-shuffle')?.addEventListener('change',e=>{ if(!doShuffle(e.target.checked)) e.target.checked=S.shuffled; });
 
   // Reflect shuffle state in UI on load
   if(el('opt-shuffle')) el('opt-shuffle').checked=S.shuffled;
+  if(el('btn-shuffle-quick')) el('btn-shuffle-quick').classList.toggle('btn-primary',S.shuffled);
   if(S.shuffled&&el('shuffle-badge')) el('shuffle-badge').classList.remove('hidden');
 
   // Auto-save every 30s
